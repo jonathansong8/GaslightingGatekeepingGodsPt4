@@ -1,0 +1,24 @@
+GaslightingGatekeepingGodsPt4
+Jonathan Song
+Daniel Liu
+Nicholas Tarsis
+Kevin Xiao
+pd 2
+---------------------
+Interactive Globe of Various Countries Displaying Data like Air Quality, Water Quality, and Country Data
+
+
+ ______   ______   __   __  __       ______   _______     
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+==============================================================
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+DanielL -- 2022-12-06 19:22
+--------------------------------------------------------------
+Added DevLog Template. Updated Design Doc with More sections like Detailed API Descriptions and Framework Choice. Revised Both User Map and Component Map.
+==============================================================
