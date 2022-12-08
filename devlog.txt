@@ -22,3 +22,8 @@ DanielL -- 2022-12-06 19:22
 --------------------------------------------------------------
 Added DevLog Template. Updated Design Doc with More sections like Detailed API Descriptions and Framework Choice. Revised Both User Map and Component Map.
 ==============================================================
+
+DanielL -- 2022-12-09 09:26
+--------------------------------------------------------------
+Added styling with Boostrap to both the Login and Response Page. 
+==============================================================
