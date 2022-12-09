@@ -2,6 +2,7 @@ from flask import Flask             #facilitate flask webserving
 from flask import render_template, request   #facilitate jinja templating
 from flask import session, redirect, url_for, make_response        #facilitate form submission
 import os
+from management import User
 
 #the conventional way:
 #from flask import Flask, render_template, request
@@ -41,6 +42,23 @@ def login():
             resp = render_template('response.html',username = session['username'])
             return resp
     return redirect(url_for('index'))
+
+@app.route('/register', methods = ['GET', 'POST'])
+def register():
+    if "username" in session:
+        return redirect(url_for('index'))
+
+    # GET request: display the form
+    if request.method == "GET":
+        return render_template("registration.html")
+
+    # POST request: handle the form response and redirect
+    username = request.form['username']
+    password = request.form['password']
+    
+    User.new_user(username, password)
+
+    return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
