@@ -16,7 +16,7 @@ password = "admin"
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('response.html',username = session['username'])
+        return render_template('home_page.html',username = session['username'])
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -39,7 +39,7 @@ def login():
             return resp
         else:
             session['username'] = request.form['username']
-            resp = render_template('response.html',username = session['username'])
+            resp = render_template('home_page.html',username = session['username'])
             return resp
     return redirect(url_for('index'))
 
