@@ -2,7 +2,8 @@ from flask import Flask             #facilitate flask webserving
 from flask import render_template, request   #facilitate jinja templating
 from flask import session, redirect, url_for, make_response        #facilitate form submission
 import os
-from management import User
+#from management import User
+import db
 
 #the conventional way:
 #from flask import Flask, render_template, request
@@ -10,8 +11,8 @@ from management import User
 app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
 
-username = "ads"
-password = "admin"
+user_header = ("(username TEXT, password TEXT)")
+db.create_table("userInfo",user_header)
 
 @app.route('/')
 def index():
@@ -29,18 +30,9 @@ def login():
     if request.method == 'POST':
         userIn = request.form.get('username')
         passIn = request.form.get('password')
-        print(userIn)
-        print(passIn)
-        if(userIn != username):
-            resp = make_response(render_template("error.html", msg = "wrong username"),404)
-            return resp
-        elif passIn != password:
-            resp = make_response(render_template("error.html", msg = "wrong password"),404)
-            return resp
-        else:
-            session['username'] = request.form['username']
-            resp = render_template('home_page.html',username = session['username'])
-            return resp
+        session['username'] = request.form['username']
+        resp = render_template('home_page.html',username = session['username'])
+        return resp
     return redirect(url_for('index'))
 
 @app.route('/register', methods = ['GET', 'POST'])
@@ -55,10 +47,11 @@ def register():
     # POST request: handle the form response and redirect
     username = request.form['username']
     password = request.form['password']
-    
-    User.new_user(username, password)
-
-    return redirect(url_for('login'))
+    if db.check_username(username) == True:
+        return (make_response(render_template("error.html",msg="Username already exists, Please Login")))
+    else:
+        db.add_account(username,password)
+        return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
