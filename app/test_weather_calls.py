@@ -1,9 +1,36 @@
 import requests
+latitude = 38.8894
+longitude = -78.0352
+url = f"https://api.weather.gov/points/{latitude},{longitude}"
 def process(url):
-    headers = {"accept": "application/json"}
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     response = response.json()
-    response = response["results"]
+    return response
+original = process(url)
+forecast = {}
+other_links = {}
+
+
+for sub in original["properties"]:
+    if "forecast" in sub:
+        forecast[sub]=original["properties"][sub]
+        print(sub)
+        print(forecast[sub])
+        print()
+city = original["properties"]["relativeLocation"]["properties"]["city"]
+state = original["properties"]["relativeLocation"]["properties"]["state"]
+print(city,state)
+
+    
+
+for i in forecast:
+    curr = process(forecast[i])
+    #print(curr)
+
+"""
+def process(url):
+    response = requests.get(url)
+    response = response.json()
     return response
 
 all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
@@ -50,5 +77,5 @@ for id in ids:
         arr.append([key,any["value"]])
 
 print(arr)
-
+"""
 
