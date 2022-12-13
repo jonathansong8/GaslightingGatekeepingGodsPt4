@@ -4,6 +4,7 @@ from flask import session, redirect, url_for, make_response        #facilitate f
 import os
 #from management import User
 import db
+from countries import *
 
 #the conventional way:
 #from flask import Flask, render_template, request
@@ -17,7 +18,7 @@ db.create_table("userInfo",user_header)
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('home_page.html',username = session['username'])
+        return render_template('home_page.html',username = session['username'], countriesinfo = get_countries())
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -31,7 +32,7 @@ def login():
         userIn = request.form.get('username')
         passIn = request.form.get('password')
         session['username'] = request.form['username']
-        resp = render_template('home_page.html',username = session['username'])
+        resp = render_template('home_page.html',username = session['username'], countriesinfo = get_countries())
         return resp
     return redirect(url_for('index'))
 
