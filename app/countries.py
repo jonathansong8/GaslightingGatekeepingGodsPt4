@@ -195,18 +195,33 @@ Venezuela
 Vietnam
 Yemen
 Zambia
-Zimbabwe
-'''
+Zimbabwe'''
 
-for i in list_of_countries.split('\n'):
-    API_URL = f"https://restcountries.com/v3.1/name/{i}"
-    print("***DIAG: API url ***")
-    print(API_URL)
+table = []
 
-    r = requests.get(API_URL) #creating a response object that will get us the information we needr
-    api_dict = r.json() #r.json() returns a dictonary after deconding the response object
-    population = (api_dict[0])["population"]
-    print("Population of " + i + str(population))
+def get_countries():
+    for i in list_of_countries.split('\n'):
+        API_URL = f"https://restcountries.com/v3.1/name/{i}"
+
+        r = requests.get(API_URL) #creating a response object that will get us the information we needr
+        api_dict = r.json() #r.json() returns a dictonary after deconding the response object
+        population = (api_dict[0])["population"]
+        capital = (api_dict[0])["capital"]
+        for j in capital:
+            capital = j
+        flag = (api_dict[0])["flag"]
+        
+        table.append((i, str("Population of " + i + ": " + str(population)), capital, flag))
+    
+    new = ""
+    for i in table:
+        for j in range(len(i)):
+            if (j < len(i)-1):
+                new = new + str(i[j]) + ", "
+            else:
+                new = new + str(i[j])
+        new = new + "\n"
+    return new
 
 
 
