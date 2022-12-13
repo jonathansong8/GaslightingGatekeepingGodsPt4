@@ -52,5 +52,46 @@ for entry in projects:
     val = str(entry["parameters"][0]["average"]) + " " + entry["parameters"][0]["unit"]
     dict_gases[param] = val
     count += 1
-print(count)
-print(dict_gases)
+#print(dict_gases)
+
+x = process("https://api.openaq.org/v2/locations")
+dict_lolz = {}
+for entry in x:
+    if entry["country"] is not None and entry["name"] is not None:
+        name = entry["name"] + ", " + entry["country"]
+    else:
+        name = entry["name"]
+    code = entry["id"]
+    dict_lolz[code] = name
+ids = list(dict_lolz.keys())
+
+#print(dict_lolz)
+
+dict_onez = {}
+'''
+lol = ids[0]
+y = process("https://api.openaq.org/v2/latest/" + str(lol) + "?location_id?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false")
+y = y[0]["measurements"]
+for any in y:
+    key = any["parameter"]+", "+"any["unit]
+    dict_onez[key] = any["value"]
+
+'''
+arr = []
+for id in ids:
+    y = process("https://api.openaq.org/v2/latest/" + str(id) + "?location_id?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false")
+    if y[0]["location"] is None:
+        continue
+    name = y[0]["location"]
+    y = y[0]["measurements"]
+    for any in y:
+        key = any["parameter"]+", "+ any["unit"] + " in " + name
+        print(key)
+        print(any["value"])
+        arr.append([key,any["value"]])
+        #dict_onez[key] = any["value"]
+    
+#print(dict_onez)
+print(arr)
+
+
