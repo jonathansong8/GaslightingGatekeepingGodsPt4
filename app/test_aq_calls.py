@@ -44,7 +44,7 @@ for entry in x:
     code = entry["id"]
     dict_locations[code] = name
 ids = list(dict_locations.keys())
-print(dict_locations)
+#print(dict_locations)
 
 def lookup(id):
     link = process("https://api.openaq.org/v2/latest/" + str(id) + "?location_id?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false")
@@ -54,7 +54,19 @@ def lookup(id):
         name_location = link[0]["location"]
     temp = link[0]["measurements"]
     return temp
-   
+
+def parse_measurements(all_cover):
+    result = {}
+    for entry in all_cover:
+        key = entry["parameter"] + " " + entry["unit"]
+        value = entry["value"]
+        result[key] = value
+    return result
+
+test = ids[0]
+#print(parse_measurements(lookup(test)))
+
+
 '''
 arr = []
 for id in ids:
