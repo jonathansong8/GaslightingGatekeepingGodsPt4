@@ -53,7 +53,12 @@ DanielL -- 2022-12-11 16:46
 Tested AQ Api Calls and populated some data structures.
 ==============================================================
 
-DanielL -- 2022-12-12 20:4
+DanielL -- 2022-12-12 20:04
 --------------------------------------------------------------
 Work on AQ and populate an array with a lot of locations and corresponding values.
+==============================================================
+
+NicholasT -- 2022-12-12 22:22
+--------------------------------------------------------------
+Added search bar for future and started working on weather api calls
 ==============================================================
