@@ -17,21 +17,16 @@ for country in all_countries:
 #Get Only the Keys, which are the country codes
 countries = list(dict_countries.keys())
 
+def search_country(target):
+    cities = process("https://api.openaq.org/v2/cities?limit=100000&page=1&offset=0&sort=asc&country_id=" + target + "&order_by=city")
+    a = []
+    for city in cities:
+        if not city["city"].isnumeric():
+            a.append(city["city"])
+    return a
 
-#returns parsed project (likely unusable atm)
-''''
-projects = process("https://api.openaq.org/v2/projects")
-count = 0
-dict_gases = {}
-for entry in projects:
-    print(entry["parameters"][0])
-    param = entry["parameters"][0]["displayName"] #the dict is the only thing inside the list
-    val = str(entry["parameters"][0]["average"]) + " " + entry["parameters"][0]["unit"]
-    dict_gases[param] = val
-    count += 1
-#print(count)
-#print(dict_gases)
-'''
+print(countries[1])
+print(search_country(countries[1]))
 
 #get all locations available in the openaq api and their corresponding entry id (menu dropdown?) [name,country:unique id]
 x = process("https://api.openaq.org/v2/locations")
@@ -80,4 +75,19 @@ for id in ids:
         print(key)
         print(any["value"])
         arr.append([key,any["value"]])
+'''
+
+#returns parsed project (likely unusable atm)
+''''
+projects = process("https://api.openaq.org/v2/projects")
+count = 0
+dict_gases = {}
+for entry in projects:
+    print(entry["parameters"][0])
+    param = entry["parameters"][0]["displayName"] #the dict is the only thing inside the list
+    val = str(entry["parameters"][0]["average"]) + " " + entry["parameters"][0]["unit"]
+    dict_gases[param] = val
+    count += 1
+#print(count)
+#print(dict_gases)
 '''
