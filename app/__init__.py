@@ -6,7 +6,6 @@ import os
 import db
 from countries import *
 from process_aq import *
-from bs4 import BeautifulSoup
 
 #the conventional way:
 #from flask import Flask, render_template, request
@@ -16,6 +15,10 @@ app.secret_key = os.urandom(32)
 
 user_header = ("(username TEXT, password TEXT)")
 db.create_table("userInfo",user_header)
+locations_header = ("(code TEXT, name TEXT)")
+db.create_table("locationInfo",locations_header)
+db.populate_countries()
+#print(db.get_table_locs("locationInfo","locs"))
 
 @app.route('/')
 def index():
