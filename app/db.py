@@ -1,4 +1,5 @@
 import sqlite3
+from process_aq import *
 
 DB_FILE = "zetten.db"
 
@@ -45,4 +46,20 @@ def get_table_contents(tableName):
     db.close()
     return out
 
+def add_info(code, name):
+    query("INSERT INTO locationInfo VALUES (?, ?)", (code, name))
 
+
+all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
+dict_countries = {}
+for country in all_countries:
+    code = country["code"]
+    name = country["name"]
+    dict_countries[code] = name
+
+locations_header = ("(code TEXT, name TEXT)")
+create_table("locationInfo",locations_header)
+for x,y in dict_countries.items():
+    print(x)
+    print(y)
+    add_info(x,y)
