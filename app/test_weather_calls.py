@@ -7,6 +7,7 @@ def process(url):
     response = response.json()
     return response
 original = process(url)
+print(original)
 forecast = {}
 other_links = {}
 
@@ -21,12 +22,23 @@ city = original["properties"]["relativeLocation"]["properties"]["city"]
 state = original["properties"]["relativeLocation"]["properties"]["state"]
 print(city,state)
 
-    
 
-for i in forecast:
-    curr = process(forecast[i])
-    #print(curr)
-
+info = []
+general_forecast=forecast["forecast"]
+curr_json = process(general_forecast)
+for i in curr_json["properties"]["periods"]:
+    print()
+    time = []
+    time.append(i["name"])
+    time.append(i["isDaytime"])
+    time.append(i["temperature"])
+    time.append(i["temperatureUnit"])
+    time.append(i["windSpeed"])
+    time.append(i["windDirection"])
+    time.append(i["shortForecast"])
+    time.append(i["detailedForecast"])
+    print(time)
+    info.append(time)
 """
 def process(url):
     response = requests.get(url)
