@@ -62,3 +62,9 @@ NicholasT -- 2022-12-12 22:22
 --------------------------------------------------------------
 Added search bar for future and started working on weather api calls
 ==============================================================
+
+
+DanielL -- 2022-12-14 21:17
+--------------------------------------------------------------
+Finished Air Quality API Data Extraction. Next step is the database organization/population.
+==============================================================

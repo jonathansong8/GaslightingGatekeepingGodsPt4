@@ -5,7 +5,7 @@ import os
 #from management import User
 import db
 from countries import *
-from test_aq_calls import *
+from process_aq import *
 from bs4 import BeautifulSoup
 
 #the conventional way:
@@ -20,7 +20,7 @@ db.create_table("userInfo",user_header)
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('home_page.html',username = session['username'],countriesinfo ="A", air = parse_measurements(lookup(test)))
+        return render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD")
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -34,7 +34,7 @@ def login():
         userIn = request.form.get('username')
         passIn = request.form.get('password')
         session['username'] = request.form['username']
-        resp = render_template('home_page.html',username = session['username'],countriesinfo = "A", air = parse_measurements(lookup(test)))
+        resp = render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD")
         return resp
     return redirect(url_for('index'))
 
