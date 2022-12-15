@@ -53,6 +53,11 @@ DanielL -- 2022-12-11 16:46
 Tested AQ Api Calls and populated some data structures.
 ==============================================================
 
+KevinX -- 2022-12-12 9:20
+--------------------------------------------------------------
+Created countries.py and called every country, capital, flag, and population
+==============================================================
+
 DanielL -- 2022-12-12 20:04
 --------------------------------------------------------------
 Work on AQ and populate an array with a lot of locations and corresponding values.
@@ -63,8 +68,18 @@ NicholasT -- 2022-12-12 22:22
 Added search bar for future and started working on weather api calls
 ==============================================================
 
+KevinX -- 2022-12-13 9:20
+--------------------------------------------------------------
+Organized countries calling on the website
+==============================================================
+
 
 DanielL -- 2022-12-14 21:17
 --------------------------------------------------------------
 Finished Air Quality API Data Extraction. Next step is the database organization/population.
+==============================================================
+
+KevinX -- 2022-12-15 9:20
+--------------------------------------------------------------
+Started dropdown menu feature (MVP main goal) and added more styling. Next goal: create loop inside html or jinjafy
 ==============================================================
