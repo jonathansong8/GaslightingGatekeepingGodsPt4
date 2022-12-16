@@ -57,7 +57,7 @@ def lookup_by_city_name(code):
         key = entry["parameter"] + "(" + entry["unit"] + ")"
         value = entry["value"]
         result[key] = value
-    print(code + ", " + link[0]["country"])
+    #print(code + ", " + link[0]["country"])
     return result
 
 def parse_measurements(city_id):

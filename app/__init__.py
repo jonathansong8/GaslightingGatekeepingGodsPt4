@@ -12,18 +12,16 @@ from process_aq import *
 
 app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
-
-user_header = ("(username TEXT, password TEXT)")
-db.create_table("userInfo",user_header)
-locations_header = ("(code TEXT, name TEXT)")
-db.create_table("locationInfo",locations_header)
-db.populate_countries()
-#print(db.get_table_locs("locationInfo","locs"))
+db.setup()
 
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD")
+        temp = db.get_table_specifics("locationInfo","name")
+        test = []
+        for i in temp:
+            test.append(i[0])
+        return render_template('home_page.html',username = session['username'],air=test)
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -37,7 +35,11 @@ def login():
         userIn = request.form.get('username')
         passIn = request.form.get('password')
         session['username'] = request.form['username']
-        resp = render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD")
+        temp = db.get_table_specifics("locationInfo","name")
+        test = []
+        for i in temp:
+            test.append(i[0])
+        resp = render_template('home_page.html',username = session['username'],air=test)
         return resp
     return redirect(url_for('index'))
 
@@ -64,7 +66,6 @@ def logout():
     # remove the username from the session if it's there
     session.pop('username', None)
     return redirect(url_for('index'))
-
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

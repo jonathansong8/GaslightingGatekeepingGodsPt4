@@ -46,3 +46,7 @@
     background-color: #00A4BD;
 
 }
+
+.dropdown{ 
+    max-height: 200px; overflow-y: scroll; 
+}
