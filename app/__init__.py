@@ -20,7 +20,7 @@ db.create_table("userInfo",user_header)
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD")
+        return render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD", dropdown = get_countries())
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -34,7 +34,7 @@ def login():
         userIn = request.form.get('username')
         passIn = request.form.get('password')
         session['username'] = request.form['username']
-        resp = render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD")
+        resp = render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD", dropdown = get_countries())
         return resp
     return redirect(url_for('index'))
 
@@ -53,15 +53,8 @@ def register():
     if db.check_username(username) == True:
         return (make_response(render_template("error.html",msg="Username already exists, Please Login")))
     else:
-        db.add_account(username,password)
-        return redirect(url_for('login'))
-
-@app.route('/logout')
-def logout():
-    # remove the username from the session if it's there
-    session.pop('username', None)
-    return redirect(url_for('index'))
-
+        db.add_account(username,password)=="TBD", dropdown == "TBD"
+    return render_template('login.html')
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

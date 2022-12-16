@@ -213,14 +213,15 @@ def get_countries():
         
         table.append((i, str("Population of " + i + ": " + str(population)), capital, flag))
     
-    new = ""
+    new = "'<a href="">'
     for i in table:
+        new = new + ""
         for j in range(len(i)):
             if (j < len(i)-1):
                 new = new + str(i[j]) + ", "
             else:
                 new = new + str(i[j])
-        new = new + "\n"
+        new = new + "</a>\n"
     return new
 
 
