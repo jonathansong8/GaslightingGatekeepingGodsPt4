@@ -83,3 +83,8 @@ KevinX -- 2022-12-15 9:20
 --------------------------------------------------------------
 Started dropdown menu feature (MVP main goal) and added more styling. Next goal: create loop inside html or jinjafy
 ==============================================================
+
+DanielL -- 2022-12-15 10:46
+--------------------------------------------------------------
+Populated Country Info Table. Work on Locations Inside Country
+==============================================================

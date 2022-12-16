@@ -26,51 +26,13 @@
  <input type="submit" value="logout" class="btn btn-outline-danger">
    </form>
 
-<div class="container mt-3">
-<table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-          </tr>
-          <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-          </tr>
-          <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div class="container mt-3">
-      <table class="table table-hover">
-        {{air}}        
-  </table>
-  </div>
-
-<div class="mt-5 p-4 bg-dark text-white text-center">
-  <p>GGG Inc</p>
-</div>
-<div class="top-bar">
-  <div class="top-bar-right">
+   <div class="text-center">
     <ul class="menu">
       <input type="search" placeholder="Search">
       <button type="button" class="button">Search</button>
     </ul>
   </div>
+<<<<<<< HEAD
 </div>
   
   <div class="dropdown">
@@ -82,8 +44,103 @@
   <p>
     {{countriesinfo}}
   </p>
+=======
+>>>>>>> refs/remotes/origin/main
 
-  </body>
+  <script>
+
+    var subjectObject = {
+      "US": {
+        "NY": ["Bronx"],
+        "TX": ["Dallas"],
+        "CA": ["San Diego"]    
+      },
+      "CN": {
+        "PHP": ["Variables", "Strings", "Arrays"],
+        "SQL": ["SELECT", "UPDATE", "DELETE"]
+      },
+      "AU": {
+        "PHP": ["Variables", "Strings", "Arrays"],
+        "SQL": ["SELECT", "UPDATE", "DELETE"]
+      }
+    }
+    window.onload = function() {
+      var subjectSel = document.getElementById("US");
+      var topicSel = document.getElementById("CN");
+      var chapterSel = document.getElementById("AU");
+      for (var x in subjectObject) {
+        subjectSel.options[subjectSel.options.length] = new Option(x, x);
+      }
+      subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    chapterSel.length = 1;
+    topicSel.length = 1;
+        //display correct values
+        for (var y in subjectObject[this.value]) {
+          topicSel.options[topicSel.options.length] = new Option(y, y);
+        }
+      }
+      topicSel.onchange = function() {
+    //empty Chapters dropdown
+    chapterSel.length = 1;
+        //display correct values
+        var z = subjectObject[subjectSel.value][this.value];
+        for (var i = 0; i < z.length; i++) {
+          chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+        }
+      }
+    }
+    </script>
+    
+    <form name="form1" id="form1" action="/action_page.php">
+    <select name="US" id="US">
+        <option value="" selected="selected">Select country</option>
+      </select>
+      <br><br>
+   <select name="CN" id="CN">
+        <option value="" selected="selected">Please select country first</option>
+      </select>
+      <br><br>
+   <select name="AU" id="AU">
+        <option value="" selected="selected">Please select state first</option>
+      </select>
+      <br><br>
+      <input type="submit" value="Submit">  
+    </form>
+
+
+<p> Select one from the given options:
+  <div class = "dropdown">
+    <select id="select1">
+      {% for page in air%}
+      <option value={{page}}>{{page}}</option>
+      {% endfor %}
+     </select>
+  </div>
+</p>
+
+<p> The value of the option selected is: 
+    <span class="output"></span>
+</p>
+
+
+<button onclick="getOption()"> Check option </button>
+  
+<script type="text/javascript">
+function getOption() {
+    selectElement = document.querySelector('#select1');
+    output = selectElement.value;
+    document.querySelector('.output').textContent = output;
+}
+</script>
+</body>
+
+
+
+<div class="mt-5 p-4 bg-dark text-white text-center">
+  <p>GGG Inc</p>
+</div>
+
 </html>
 
 

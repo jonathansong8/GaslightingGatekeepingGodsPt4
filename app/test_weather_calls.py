@@ -1,44 +1,40 @@
 import requests
-latitude = 38.8894
-longitude = -78.0352
-url = f"https://api.weather.gov/points/{latitude},{longitude}"
+
 def process(url):
     response = requests.get(url)
     response = response.json()
     return response
-original = process(url)
-print(original)
-forecast = {}
-other_links = {}
-
-
-for sub in original["properties"]:
-    if "forecast" in sub:
-        forecast[sub]=original["properties"][sub]
-        print(sub)
-        print(forecast[sub])
-        print()
-city = original["properties"]["relativeLocation"]["properties"]["city"]
-state = original["properties"]["relativeLocation"]["properties"]["state"]
-print(city,state)
-
-
-info = []
-general_forecast=forecast["forecast"]
-curr_json = process(general_forecast)
-for i in curr_json["properties"]["periods"]:
-    print()
-    time = []
-    time.append(i["name"])
-    time.append(i["isDaytime"])
-    time.append(i["temperature"])
-    time.append(i["temperatureUnit"])
-    time.append(i["windSpeed"])
-    time.append(i["windDirection"])
-    time.append(i["shortForecast"])
-    time.append(i["detailedForecast"])
-    print(time)
-    info.append(time)
+def location(latitude,longitude):
+    url = f"https://api.weather.gov/points/{latitude},{longitude}"
+    original = process(url)
+    city = original["properties"]["relativeLocation"]["properties"]["city"]
+    state = original["properties"]["relativeLocation"]["properties"]["state"]
+    return city,state
+def forecast(latitude,longitude):
+    url = f"https://api.weather.gov/points/{latitude},{longitude}"
+    original = process(url)
+    forecast = {}
+    other_links = {}
+    for sub in original["properties"]:
+        if "forecast" in sub:
+            forecast[sub]=original["properties"][sub]
+    
+    info = []
+    general_forecast=forecast["forecast"]
+    curr_json = process(general_forecast)
+    for i in curr_json["properties"]["periods"]:
+        time = []
+        time.append(i["name"])
+        time.append(i["isDaytime"])
+        time.append(i["temperature"])
+        time.append(i["temperatureUnit"])
+        time.append(i["windSpeed"])
+        time.append(i["windDirection"])
+        time.append(i["shortForecast"])
+        time.append(i["detailedForecast"])
+        info.append(time)
+    return info
+print(location(35,-78),forecast(35,-78))
 """
 def process(url):
     response = requests.get(url)

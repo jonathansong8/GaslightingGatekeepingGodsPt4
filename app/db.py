@@ -1,4 +1,5 @@
 import sqlite3
+from process_aq import *
 
 DB_FILE = "zetten.db"
 
@@ -45,4 +46,43 @@ def get_table_contents(tableName):
     db.close()
     return out
 
+def get_table_specifics(tableName, search):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    res = c.execute(f"SELECT {search} from {tableName}")
+    out = res.fetchall()
+    db.commit()
+    db.close()
+    return out
+
+def add_info(code, name):
+    query("INSERT INTO locationInfo VALUES (?, ?)", (code, name))
+
+def populate_countries():
+    all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
+    dict_countries = {}
+    for country in all_countries:
+        code = country["code"]
+        name = country["name"]
+        dict_countries[code] = name
+    for x,y in dict_countries.items():
+        add_info(x,y)
+
+def setup():
+    user_header = ("(username TEXT, password TEXT)")
+    create_table("userInfo",user_header)
+    locations_header = ("(code TEXT, name TEXT)")
+    create_table("locationInfo",locations_header)
+    populate_countries()
+
+def get_final():
+    all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
+    temp_dict = {}
+    for country in all_countries:
+        code = country["code"]
+        name = country["name"]
+        all_locs = get__all_cities(code)
+        temp_dict[name] = all_locs
+    return temp_dict
+     
 

@@ -8,6 +8,7 @@ def process(url):
     return response
 
 #Returns a Dict of Country Codes Along with their Respective Names
+'''
 all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
 dict_countries = {}
 for country in all_countries:
@@ -16,7 +17,7 @@ for country in all_countries:
     dict_countries[code] = name
 #Get Only the Keys, which are the country codes
 countries = list(dict_countries.keys())
-
+'''
 #gets all cities associated with a country
 def get__all_cities(country_name):
     cities = process("https://api.openaq.org/v2/cities?limit=100000&page=1&offset=0&sort=asc&country_id=" + country_name + "&order_by=city")
@@ -39,7 +40,7 @@ def lookup_by_city_id(id):
     link = process("https://api.openaq.org/v2/latest/" + str(id) + "?location_id?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false")
     if link[0]["location"] is None:
         return "Invalid Location"
-    else:    
+    else:
         name_location = link[0]["location"]
     temp = link[0]["measurements"]
     return temp
@@ -48,7 +49,7 @@ def lookup_by_city_name(code):
     link = process( "https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=" + code + "&order_by=lastUpdated&dumpRaw=false")
     if link[0]["location"] is None:
         return "Invalid Location"
-    else:    
+    else:
         name_location = link[0]["location"]
     temp = link[0]["measurements"]
     result = {}
@@ -56,7 +57,7 @@ def lookup_by_city_name(code):
         key = entry["parameter"] + "(" + entry["unit"] + ")"
         value = entry["value"]
         result[key] = value
-    print(code + ", " + link[0]["country"])
+    #print(code + ", " + link[0]["country"])
     return result
 
 def parse_measurements(city_id):
