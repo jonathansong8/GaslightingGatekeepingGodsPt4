@@ -13,15 +13,17 @@ from process_aq import *
 app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
 db.setup()
+temp = list(db.populate_countries().values())
+#temp_1 = list(db.get_final().values())
+temp_1 = list(db.get_final().values())
+#print(temp_1) 
+temp_2 = lookup_by_city_name(temp_1[1][0]) #info display for 'Abu Al Abyad'
+
 
 @app.route('/')
 def index():
     if 'username' in session:
-        temp = db.get_table_specifics("locationInfo","name")
-        test = []
-        for i in temp:
-            test.append(i[0])
-        return render_template('home_page.html',username = session['username'],countriesinfo="TBD",air=test, dropdown = get_countries())
+        return render_template('home_page.html',username = session['username'],countriesinfo="TBD",countries=temp,locations=temp_1,info=temp_2)
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -35,11 +37,7 @@ def login():
         userIn = request.form.get('username')
         passIn = request.form.get('password')
         session['username'] = request.form['username']
-        temp = db.get_table_specifics("locationInfo","name")
-        test = []
-        for i in temp:
-            test.append(i[0])
-        resp = render_template('home_page.html',username = session['username'],countriesinfo="TBD",air=test,dropdown = get_countries())
+        resp = render_template('home_page.html',username = session['username'],countriesinfo="TBD",countries=temp,locations=temp_1,info=temp_2)
         return resp
     return redirect(url_for('index'))
 
@@ -60,6 +58,11 @@ def register():
     else:
         db.add_account(username,password)
     return render_template('login.html')
+
+@app.route("/logout")
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

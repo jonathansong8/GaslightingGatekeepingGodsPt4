@@ -37,93 +37,68 @@
   <p>
     {{countriesinfo}}
   </p>
-
-  <script>
-
-    var subjectObject = {
-      "US": {
-        "NY": ["Bronx"],
-        "TX": ["Dallas"],
-        "CA": ["San Diego"]    
-      },
-      "CN": {
-        "PHP": ["Variables", "Strings", "Arrays"],
-        "SQL": ["SELECT", "UPDATE", "DELETE"]
-      },
-      "AU": {
-        "PHP": ["Variables", "Strings", "Arrays"],
-        "SQL": ["SELECT", "UPDATE", "DELETE"]
-      }
-    }
-    window.onload = function() {
-      var subjectSel = document.getElementById("US");
-      var topicSel = document.getElementById("CN");
-      var chapterSel = document.getElementById("AU");
-      for (var x in subjectObject) {
-        subjectSel.options[subjectSel.options.length] = new Option(x, x);
-      }
-      subjectSel.onchange = function() {
-    //empty Chapters- and Topics- dropdowns
-    chapterSel.length = 1;
-    topicSel.length = 1;
-        //display correct values
-        for (var y in subjectObject[this.value]) {
-          topicSel.options[topicSel.options.length] = new Option(y, y);
-        }
-      }
-      topicSel.onchange = function() {
-    //empty Chapters dropdown
-    chapterSel.length = 1;
-        //display correct values
-        var z = subjectObject[subjectSel.value][this.value];
-        for (var i = 0; i < z.length; i++) {
-          chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
-        }
-      }
-    }
-    </script>
     
-    <form name="form1" id="form1" action="/action_page.php">
-    <select name="US" id="US">
-        <option value="" selected="selected">Select country</option>
-      </select>
-      <br><br>
-   <select name="CN" id="CN">
-        <option value="" selected="selected">Please select country first</option>
-      </select>
-      <br><br>
-   <select name="AU" id="AU">
-        <option value="" selected="selected">Please select state first</option>
-      </select>
-      <br><br>
-      <input type="submit" value="Submit">  
-    </form>
-
-
-<p> Select one from the given options:
+<p> Select a country below:
   <div class = "dropdown">
     <select id="select1">
-      {% for page in air%}
+      {% for page in countries%}
       <option value={{page}}>{{page}}</option>
       {% endfor %}
      </select>
   </div>
 </p>
 
-<p> The value of the option selected is: 
-    <span class="output"></span>
+<br>
+
+<p> Select a location in that country:
+  <div class = "dropdown">
+    <select id="select2">
+      {% for value in locations %}
+        {% for val in value %}
+          <option value={{val}}>{{val}}</option>
+      {% endfor %}
+      {% endfor %}
+     </select>
+  </div>
 </p>
 
-
-<button onclick="getOption()"> Check option </button>
+<button onclick="getOption()"> Get Country and Location </button>
   
 <script type="text/javascript">
 function getOption() {
     selectElement = document.querySelector('#select1');
-    output = selectElement.value;
+    selectElement1 = document.querySelector('#select2');
+    output = selectElement.value + ", " + selectElement1.value;
     document.querySelector('.output').textContent = output;
 }
 </script>
+
+<p> Country and Location Selected Is: 
+    <span class="output"></span>
+</p>
+
+<div class="container mt-3">
+<table class="table table-hover">
+  <tr>
+      {% for key in info.keys() %}
+          <td>{{key}}</td>
+      {% endfor %}
+  </tr>
+
+  {% for x in info.values()%}
+        <td>{{x}}</td>
+  {% endfor %}
+
+</table>
+</div>
+
+<p>
+  {% for key,value in info.items() %}
+    <dt>{{ key }}</dt>
+    <dd>{{ value}}</dd>
+  {% endfor %}
+</p>
+
 </body>
 
 

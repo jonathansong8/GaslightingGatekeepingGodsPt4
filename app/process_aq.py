@@ -23,7 +23,7 @@ def get__all_cities(country_name):
     cities = process("https://api.openaq.org/v2/cities?limit=100000&page=1&offset=0&sort=asc&country_id=" + country_name + "&order_by=city")
     a = []
     for city in cities:
-        if not city["city"].isnumeric():
+        if not city["city"].isnumeric() and city["city"] != "unused" and city["city"] != "N/A":
             a.append(city["city"])
     return a
 
