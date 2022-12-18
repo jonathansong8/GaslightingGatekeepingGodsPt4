@@ -230,13 +230,14 @@ def get_country(country_name):
 
     r = requests.get(API_URL) #creating a response object that will get us the information we needr
     api_dict = r.json() #r.json() returns a dictonary after deconding the response object
+    print(api_dict)
     population = (api_dict[0])["population"]
     capital = (api_dict[0])["capital"]
-    country = (api_dict[0])["name"].get('common')
     for j in capital:
         capital = j
     flag = (api_dict[0])["flag"]
-    new = "Country: " + str(country) + "\n Population: " + str(population) + "Capital: " + capital + "\n Flag: " + flag
-    return new
+    new = "Country: " + country_name + "\n Population: " + str(population) + "\n Capital: " + capital + "\n Flag: " + flag
 
-print(get_country("AR"))
+    return new
+    
+

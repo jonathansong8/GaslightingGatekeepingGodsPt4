@@ -60,10 +60,19 @@
 
 <h2>Select a Country to see Available Locations:</h2>
 <div class="dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Air Quality)</a>
   <form action="/find_locations" method="POST">
       {% for page in countries%}
         <input name="name" value="{{page}}" type="submit" class="dropdown-item">
+      {% endfor %}
+  </form>
+</div>
+
+<div class="dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Data)</a>
+  <form action="/countries_data" method="POST">
+      {% for page in countries%}
+        <input name="country_name" value="{{page}}" type="submit" class="dropdown-item">
       {% endfor %}
   </form>
 </div>

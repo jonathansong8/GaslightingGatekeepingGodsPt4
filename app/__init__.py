@@ -99,6 +99,17 @@ def location_data():
             country = " THERE WAS NO COUNTRY??"
         return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,country=country))
 
+@app.route('/countries_data', methods = ['GET', 'POST'])
+def countries_data():
+    if request.method == 'POST' and verify_session():
+        country = request.form.get("country_name")
+        print(country)
+        try:
+            country = get_country(country)
+        except:
+            country = "No data"
+        return make_response(render_template("country.html", country=country))
+
 @app.route("/logout")
 def logout():
     session.pop('username', None)
