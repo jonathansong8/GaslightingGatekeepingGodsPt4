@@ -213,7 +213,11 @@ def get_countries():
         
         table.append((i, str("Population of " + i + ": " + str(population)), capital, flag))
     
+<<<<<<< HEAD
     new = "<a href="">"
+=======
+    new = ""
+>>>>>>> refs/remotes/origin/main
     for i in table:
         new = new + ""
         for j in range(len(i)):
