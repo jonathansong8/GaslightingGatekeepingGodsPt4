@@ -84,5 +84,3 @@ def get_final():
         all_locs = get__all_cities(code)
         temp_dict[name] = all_locs
     return temp_dict
-     
-
