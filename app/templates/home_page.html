@@ -7,12 +7,12 @@
    
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
    <link rel="stylesheet" href="static/css/style.css" type="text/css">
-   <title> LOGIN PAGE </title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+   <title> HOME PAGE </title>
   </head>
  
   <body>
-    
-  </body>
+
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <!-- Links -->
       <a class="navbar-brand" href="#">
@@ -27,18 +27,14 @@
    </form>
 
    <div class="text-center">
-    <ul class="menu">
-      <input type="search" placeholder="Search">
-      <button type="button" class="button">Search</button>
-    </ul>
+    <h2>Directly Search Up City Here (Case Sensitive):</h2>
+    <form action="/direct_get_info" method= "POST">
+      <input type="text" name="location">
+       <input type="submit" value="Get Data" placeholder="New York">
+    </form>
   </div>
-</div>
 
-  <p>
-    {{countriesinfo}}
-  </p>
-    
-<p> Select a country below:
+<p> <strong>All Countries:</strong>
   <div class = "dropdown">
     <select id="select1">
       {% for page in countries%}
@@ -48,13 +44,11 @@
   </div>
 </p>
 
-<br>
-
-<p> Select a location in that country:
+<p> <strong>All Cities:</strong>
   <div class = "dropdown">
     <select id="select2">
-      {% for value in locations %}
-        {% for val in value %}
+      {% for value in locations%}
+        {% for val in value%}
           <option value={{val}}>{{val}}</option>
       {% endfor %}
       {% endfor %}
@@ -62,46 +56,23 @@
   </div>
 </p>
 
-<button onclick="getOption()"> Get Country and Location </button>
-  
-<script type="text/javascript">
-function getOption() {
-    selectElement = document.querySelector('#select1');
-    selectElement1 = document.querySelector('#select2');
-    output = selectElement.value + ", " + selectElement1.value;
-    document.querySelector('.output').textContent = output;
-}
-</script>
+<br>
 
-<p> Country and Location Selected Is: 
-    <span class="output"></span>
-</p>
-
-<div class="container mt-3">
-<table class="table table-hover">
-  <tr>
-      {% for key in info.keys() %}
-          <td>{{key}}</td>
+<h2>Select a Country to see Available Locations:</h2>
+<div class="dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries</a>
+  <form action="/find_locations" method="POST">
+      {% for page in countries%}
+        <input name="name" value="{{page}}" type="submit" class="dropdown-item">
       {% endfor %}
-  </tr>
-
-  {% for x in info.values()%}
-        <td>{{x}}</td>
-  {% endfor %}
-
-</table>
+  </form>
 </div>
+<br>
 
-<p>
-  {% for key,value in info.items() %}
-    <dt>{{ key }}</dt>
-    <dd>{{ value}}</dd>
-  {% endfor %}
-</p>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
 </body>
-
-
 
 <div class="mt-5 p-4 bg-dark text-white text-center">
   <p>GGG Inc</p>

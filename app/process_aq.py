@@ -28,11 +28,15 @@ def get__all_cities(country_name):
     return a
 
 
-def find_city(city_name):
+def find_country_of(city_name):
     x = process("https://api.openaq.org/v2/locations?limit=1000&page=1&offset=0&sort=desc&city=" + city_name + "&order_by=lastUpdated&dumpRaw=false")
     for loc in x:
-        if loc["city"] == city_name and loc["id"]:
-            return loc["id"]
+        if loc["city"] == city_name:
+            temp = loc["country"]
+    all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
+    for country in all_countries:
+        if country["code"] == temp:
+            return country["name"]
     return "Not Found"
 
 
@@ -47,15 +51,12 @@ def lookup_by_city_id(id):
 
 def lookup_by_city_name(code):
     link = process( "https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=" + code + "&order_by=lastUpdated&dumpRaw=false")
-    if link[0]["location"] is None:
-        return "Invalid Location"
-    else:
-        name_location = link[0]["location"]
+    name_location = link[0]["location"]
     temp = link[0]["measurements"]
     result = {}
     for entry in temp:
-        key = entry["parameter"] + "(" + entry["unit"] + ")"
-        value = entry["value"]
+        key = entry["parameter"] + " (" + entry["unit"] + ")"
+        value = entry["value"] 
         result[key] = value
     #print(code + ", " + link[0]["country"])
     return result

@@ -83,3 +83,9 @@ def get_final():
         all_locs = get__all_cities(code)
         temp_dict[name] = all_locs
     return temp_dict
+
+def convert(name):
+    all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
+    for country in all_countries:
+        if country["name"] == name:
+            return country["code"]

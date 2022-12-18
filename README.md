@@ -4,7 +4,11 @@
 
 The API’s we will use are the Google Maps API, Air Quality API, Water Quality API, and to some extent, the Country API. We will use the Google Maps API to create tables of relevant data. Once the user clicks on a country, a window will pop up in the corner of their screen for that country that displays relevant information specific to that country, like Air Quality and Water Quality. In order to fully customize the window, we will use the Country API to show data like flags and population. As a stretch goal, we may also incorporate Chat GPT in some manner.
 
+# Note
+This App Does Not Require API Keys.
+
 # Launch Codes
+
 0. Clone repository
 
  ```bash
