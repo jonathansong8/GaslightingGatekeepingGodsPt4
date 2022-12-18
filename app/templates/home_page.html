@@ -27,64 +27,10 @@
    </form>
 
    <div class="text-center">
-<<<<<<< HEAD
-    <ul class="menu">
-      <input type="search" placeholder="Search">
-      <button type="button" class="button">Search</button>
-    </ul>
-  </div>
-
-  <script>
-
-    var subjectObject = {{{datastructure}}}
-    window.onload = function() {
-      var subjectSel = document.getElementById("US");
-      var topicSel = document.getElementById("CN");
-      var chapterSel = document.getElementById("AU");
-      for (var x in subjectObject) {
-        subjectSel.options[subjectSel.options.length] = new Option(x, x);
-      }
-      subjectSel.onchange = function() {
-    //empty Chapters- and Topics- dropdowns
-    chapterSel.length = 1;
-    topicSel.length = 1;
-        //display correct values
-        for (var y in subjectObject[this.value]) {
-          topicSel.options[topicSel.options.length] = new Option(y, y);
-        }
-      }
-      topicSel.onchange = function() {
-    //empty Chapters dropdown
-    chapterSel.length = 1;
-        //display correct values
-        var z = subjectObject[subjectSel.value][this.value];
-        for (var i = 0; i < z.length; i++) {
-          chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
-        }
-      }
-    }
-    </script>
-    
-    <form name="form1" id="form1" action="/action_page.php">
-    <select name="US" id="US">
-        <option value="" selected="selected">Select country</option>
-      </select>
-      <br><br>
-   <select name="CN" id="CN">
-        <option value="" selected="selected">Please select country first</option>
-      </select>
-      <br><br>
-   <select name="AU" id="AU">
-        <option value="" selected="selected">Please select state first</option>
-      </select>
-      <br><br>
-      <input type="submit" value="Submit">  
-=======
     <h2>Directly Search Up City Here (Case Sensitive):</h2>
     <form action="/direct_get_info" method= "POST">
       <input type="text" name="location">
        <input type="submit" value="Get Data" placeholder="New York">
->>>>>>> refs/remotes/origin/main
     </form>
   </div>
 

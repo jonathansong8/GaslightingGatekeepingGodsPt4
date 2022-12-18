@@ -6,54 +6,25 @@ import os
 import db
 from countries import *
 from process_aq import *
-from db import *
 
 #the conventional way:
 #from flask import Flask, render_template, request
 
 app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
-<<<<<<< HEAD
-setup()
-=======
 db.setup()
 temp = list(db.populate_countries().values())
 #temp_1 = list(db.get_final().values())
 temp_1 = list(db.get_final().values())
->>>>>>> refs/remotes/origin/main
 
 @app.route('/')
 def index():
     if 'username' in session:
-<<<<<<< HEAD
-        temp = get_table_specifics("locationInfo","name")
-        test = []
-        for i in temp:
-            test.append(i[0])
-        return render_template('home_page.html',username = session['username'],air=test, dropdown=get_countries(), datastructure = get_final())
-=======
         return redirect("/home")
->>>>>>> refs/remotes/origin/main
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-<<<<<<< HEAD
-    '''
-    if request.method == 'POST':
-        session['username'] = request.form['username']
-        return redirect(url_for('index'))
-    '''
-    if request.method == 'POST':
-        userIn = request.form.get('username')
-        passIn = request.form.get('password')
-        session['username'] = request.form['username']
-        temp = get_table_specifics("locationInfo","name")
-        test = []
-        for i in temp:
-            test.append(i[0])
-        resp = render_template('home_page.html',username = session['username'],air=test, datastructure = get_final())
-=======
     #Check if it already exists in database and render home page if it does
     #otherwise redirect to error page which will have a button linking to the login page
     username = request.form.get('username')
@@ -66,7 +37,6 @@ def login():
         return render_template("registration.html")
     else:
         resp = make_response(render_template('error.html',msg = "username or password is not correct"))
->>>>>>> refs/remotes/origin/main
         return resp
 
 @app.route('/register', methods = ['GET', 'POST'])
@@ -89,22 +59,11 @@ def home():
     if db.verify_account(username, password):
         return render_template('home_page.html',username = session['username'],countriesinfo="TBD",countries=temp,locations=temp_1)
 
-<<<<<<< HEAD
-    # POST request: handle the form response and redirect
-    username = request.form['username']
-    password = request.form['password']
-    if check_username(username) == True:
-        return (make_response(render_template("error.html",msg="Username already exists, Please Login")))
-    else:
-        add_account(username,password)
-        return redirect(url_for('login'))
-=======
 def verify_session():
     if 'username' in session and 'password' in session:
         if db.verify_account(session['username'], session['password']):
             return True
     return False
->>>>>>> refs/remotes/origin/main
 
 @app.route('/direct_get_info',methods = ['GET', 'POST'])
 def direct_get_info():
