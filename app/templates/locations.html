@@ -25,17 +25,13 @@
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Locations</a>
         <form action="/extract_data" method= "POST">
             {% for a in arr%}
-              <input name="location_name" value="{{a}}" type="submit" class="dropdown-item" id="{{a}}">
-              
+              <input name="location_name" value="{{a}}" type="submit" class="dropdown-item" id={{a}} >
             {% endfor %}
-            
-
         </form>
       </div>
-    
 
         <form action="/">
-            <input type=submit value="Back to home">
+            <input class="btn btn-outline-warning" type=submit value="Back to home">
           </form>
 </body>
 

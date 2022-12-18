@@ -11,11 +11,15 @@
  
   <body>
 
-    <div class="container mt-3">
+        <p>
+          <h1>Displaying Info For: {{selection}}, {{country_name}}</h1>
+      </p>
+
+      <div class="container mt-3">
         <table class="table table-hover">
           <tr>
               {% for key in info.keys() %}
-                  <td>{{key}}</td>
+                  <td><strong>{{key}}</strong></td>
               {% endfor %}
           </tr>
         
@@ -25,14 +29,17 @@
         
         </table>
         </div>
-    
+
         <p>
-            {{selection}}  {{country_name}}
+        {% for key,value in info.items() %}
+              <dt>{{ key }}</dt>
+              <dd>{{ value}}</dd>
+            {% endfor %}
         </p>
 
         <form action="/">
-            <input type=submit value="Back to home">
-          </form>
+          <input class="btn btn-outline-warning" type=submit value="Back to home">
+        </form>
 </body>
 
 </html>

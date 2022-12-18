@@ -23,14 +23,14 @@
       </a>
 </nav>
   <form action="/logout">
- <input type="submit" value="logout" class="btn btn-outline-danger">
+ <input type="submit" value="logout" class="btn btn-danger">
    </form>
 
    <div class="text-center">
     <h2>Directly Search Up City Here (Case Sensitive):</h2>
     <form action="/direct_get_info" method= "POST">
-      <input type="text" name="location">
-       <input type="submit" value="Get Data" placeholder="New York">
+      <input type="text" name="location" placeholder="New York" >
+       <input class="btn btn-primary" type="submit" value="Get Data">
     </form>
   </div>
 

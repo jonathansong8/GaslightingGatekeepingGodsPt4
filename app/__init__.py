@@ -45,7 +45,7 @@ def register():
         userIn = request.form.get('username')
         passIn = request.form.get('password') 
         if db.add_account(userIn, passIn) == -1:
-            return f"account with username {userIn} already exists"
+            return render_template("error.html", msg = f"account with username {userIn} already exists")
         else:
             return render_template("register_success.html")
     return render_template("registration.html")
@@ -73,7 +73,7 @@ def direct_get_info():
         if find_country_of(loc) != "Not Found":
             #return make_response(render_template("test.html",info=var,country_name=find_country_of(loc)))
             return make_response(render_template("direct.html",info=var,country_name=find_country_of(loc),selection=loc))
-    return f"{loc}typed wrong"
+    return render_template("error.html",msg=f"{loc}typed wrong")
     
         
 @app.route('/find_locations', methods = ['GET', 'POST'])
