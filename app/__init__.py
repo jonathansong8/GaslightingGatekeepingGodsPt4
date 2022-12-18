@@ -82,14 +82,22 @@ def find_locations():
         country = request.form.get('name')
         country = db.convert(country)
         arr = get__all_cities(country)
-        return make_response(render_template("locations.html",arr=arr))
+        try:
+            arr2 = get_country(country)
+        except:
+            arr2 = " pls work"
+        return make_response(render_template("locations.html",arr=arr, arr2=arr2))
 
 @app.route('/extract_data', methods = ['GET', 'POST'])
 def location_data():
     if request.method == 'POST' and verify_session():
         locations = request.form.get('location_name')
         dict_aq_data = lookup_by_city_name(locations)
-        return make_response(render_template("measure.html",dict_aq_data=dict_aq_data))
+        try:
+            country = request.form.get("country_data")
+        except:
+            country = " THERE WAS NO COUNTRY??"
+        return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,country=country))
 
 @app.route("/logout")
 def logout():
