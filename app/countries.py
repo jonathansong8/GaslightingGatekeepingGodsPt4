@@ -199,6 +199,12 @@ Zimbabwe'''
 
 table = []
 
+def get_world_countries():
+    arr = []
+    for i in list_of_countries.split('\n'):
+        arr.append(i)
+    return arr
+
 def get_countries():
     for i in list_of_countries.split('\n'):
         API_URL = f"https://restcountries.com/v3.1/name/{i}"

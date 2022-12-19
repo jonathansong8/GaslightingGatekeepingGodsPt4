@@ -16,6 +16,7 @@ db.setup()
 temp = list(db.populate_countries().values())
 #temp_1 = list(db.get_final().values())
 temp_1 = list(db.get_final().values())
+entry_countries = get_world_countries()
 
 @app.route('/')
 def index():
@@ -36,7 +37,7 @@ def login():
     if request.form.get('submit_button') is not None:
         return render_template("registration.html")
     else:
-        resp = make_response(render_template('error.html',msg = "username or password is not correct"))
+        resp = make_response(render_template('error.html',msg = "Username or Password is not correct"))
         return resp
 
 @app.route('/register', methods = ['GET', 'POST'])
@@ -57,7 +58,7 @@ def home():
     username = session['username']
     password = session['password']
     if db.verify_account(username, password):
-        return render_template('home_page.html',username = session['username'],countriesinfo="TBD",countries=temp,locations=temp_1)
+        return render_template('home_page.html',username = session['username'],countries=temp,locations=temp_1,world=entry_countries)
 
 def verify_session():
     if 'username' in session and 'password' in session:
@@ -69,11 +70,14 @@ def verify_session():
 def direct_get_info():
     if request.method == 'POST' and verify_session():
         loc = request.form.get('location')
-        var = lookup_by_city_name(loc)
+        try:
+            var = lookup_by_city_name(loc)
+        except:
+            return render_template("error.html",msg=f"{loc} is not a valid location")
         if find_country_of(loc) != "Not Found":
             #return make_response(render_template("test.html",info=var,country_name=find_country_of(loc)))
             return make_response(render_template("direct.html",info=var,country_name=find_country_of(loc),selection=loc))
-    return render_template("error.html",msg=f"{loc}typed wrong")
+    return render_template("error.html",msg="Error Caught")
     
         
 @app.route('/find_locations', methods = ['GET', 'POST'])
@@ -81,12 +85,13 @@ def find_locations():
     if request.method == 'POST' and verify_session():
         country = request.form.get('name')
         country = db.convert(country)
-        arr = get__all_cities(country)
         try:
-            arr2 = get_country(country)
+            arr = get__all_cities(country)
+            data = get_country(country)
         except:
-            arr2 = " pls work"
-        return make_response(render_template("locations.html",arr=arr, arr2=arr2))
+            print(f"There are no cities available for{country}")
+        return make_response(render_template("locations.html",arr=arr,username=session["username"]))
+    return make_response(render_template("error.html",msg="Error Caught"))
 
 @app.route('/extract_data', methods = ['GET', 'POST'])
 def location_data():
@@ -96,8 +101,9 @@ def location_data():
         try:
             country = request.form.get("country_data")
         except:
-            country = " THERE WAS NO COUNTRY??"
-        return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,country=country))
+            country = "THERE WAS NO COUNTRY??"
+        return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,country=locations))
+    return make_response(render_template("error.html",msg="Error Caught"))
 
 @app.route('/countries_data', methods = ['GET', 'POST'])
 def countries_data():
@@ -109,6 +115,7 @@ def countries_data():
         except:
             country = "No data"
         return make_response(render_template("country.html", country=country))
+    return make_response(render_template("error.html",msg="Error Caught"))
 
 @app.route("/logout")
 def logout():

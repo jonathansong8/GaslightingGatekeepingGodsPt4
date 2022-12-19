@@ -23,7 +23,7 @@
       </a>
 </nav>
   <form action="/logout">
- <input type="submit" value="logout" class="btn btn-danger">
+ <input type="submit" value="logout" class="btn btn-outline-danger">
    </form>
 
    <div class="text-center">
@@ -34,7 +34,20 @@
     </form>
   </div>
 
-<p> <strong>All Countries:</strong>
+  <h2>Select a Country to see Relevant Info From Countries API:</h2>
+<div class="dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Data)</a>
+  <form action="/countries_data" method="POST">
+      {% for result in world %}
+        <input name="country_name" value="{{result}}" type="submit" class="dropdown-item">
+      {% endfor %}
+  </form>
+</div>
+
+<br>
+<br>
+
+<p> <strong>All Countries For Air Quality:</strong>
   <div class = "dropdown">
     <select id="select1">
       {% for page in countries%}
@@ -44,7 +57,7 @@
   </div>
 </p>
 
-<p> <strong>All Cities:</strong>
+<p> <strong>All Locations For Air Quality:</strong>
   <div class = "dropdown">
     <select id="select2">
       {% for value in locations%}
@@ -58,24 +71,16 @@
 
 <br>
 
-<h2>Select a Country to see Available Locations:</h2>
+<h2>Select a Country to see Available Locations For Air Quality:</h2>
 <div class="dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Air Quality)</a>
   <form action="/find_locations" method="POST">
-      {% for page in countries%}
-        <input name="name" value="{{page}}" type="submit" class="dropdown-item">
+      {% for result in countries%}
+        <input name="name" value="{{result}}" type="submit" class="dropdown-item">
       {% endfor %}
   </form>
 </div>
 
-<div class="dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Data)</a>
-  <form action="/countries_data" method="POST">
-      {% for page in countries%}
-        <input name="country_name" value="{{page}}" type="submit" class="dropdown-item">
-      {% endfor %}
-  </form>
-</div>
 <br>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

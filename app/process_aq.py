@@ -36,7 +36,7 @@ def find_country_of(city_name):
     all_countries = process("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country")
     for country in all_countries:
         if country["code"] == temp:
-            return country["name"]
+            return country["name"].capitalize()
     return "Not Found"
 
 
@@ -49,8 +49,10 @@ def lookup_by_city_id(id):
     temp = link[0]["measurements"]
     return temp
 
-def lookup_by_city_name(code):
-    link = process( "https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=" + code + "&order_by=lastUpdated&dumpRaw=false")
+def lookup_by_city_name(name):
+    print(name)
+    link = process( "https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=" + name + "&order_by=lastUpdated&dumpRaw=false")
+    print(link)
     name_location = link[0]["location"]
     temp = link[0]["measurements"]
     result = {}
@@ -77,35 +79,4 @@ for country in countries:
 for city_arr in arr_of_cities:
     for curr in city_arr:
         print(lookup_by_city_name(curr))
-'''
-
-#get all locations available in the openaq api and their corresponding entry id (menu dropdown?) [name,country:unique id]
-
-'''
-x = process("https://api.openaq.org/v2/locations")
-dict_locations = {}
-for entry in x:
-    if entry["country"] is not None and entry["name"] is not None:
-        name = entry["name"] + ", " + entry["country"]
-    else:
-        name = entry["name"]
-    code = entry["id"]
-    dict_locations[code] = name
-ids = list(dict_locations.keys())
-#print(dict_locations)
-'''
-
-'''
-arr = []
-for id in ids:
-    y = process("https://api.openaq.org/v2/latest/" + str(id) + "?location_id?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false")
-    if y[0]["location"] is None:
-        continue
-    name = y[0]["location"]
-    y = y[0]["measurements"]
-    for any in y:
-        key = any["parameter"]+", "+ any["unit"] + " in " + name
-        print(key)
-        print(any["value"])
-        arr.append([key,any["value"]])
 '''
