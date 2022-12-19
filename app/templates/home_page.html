@@ -7,12 +7,12 @@
    
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
    <link rel="stylesheet" href="static/css/style.css" type="text/css">
-   <title> LOGIN PAGE </title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+   <title> HOME PAGE </title>
   </head>
  
   <body>
-    
-  </body>
+
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <!-- Links -->
       <a class="navbar-brand" href="#">
@@ -23,107 +23,65 @@
       </a>
 </nav>
   <form action="/logout">
- <input type="submit" value="logout" class="btn btn-outline-danger">
+ <input type="submit" value="logout" class="btn btn-danger">
    </form>
 
    <div class="text-center">
-    <ul class="menu">
-      <input type="search" placeholder="Search">
-      <button type="button" class="button">Search</button>
-    </ul>
-  </div>
-<<<<<<< HEAD
-</div>
-  
-  <div class="dropdown">
-    <button class="dropbtn">Dropdown</button>
-    <div class="dropdown-content">
-      {{dropdown}}
-    </div>
-  </div> 
-  <p>
-    {{countriesinfo}}
-  </p>
-=======
->>>>>>> refs/remotes/origin/main
-
-  <script>
-
-    var subjectObject = {
-      "US": {
-        "NY": ["Bronx"],
-        "TX": ["Dallas"],
-        "CA": ["San Diego"]    
-      },
-      "CN": {
-        "PHP": ["Variables", "Strings", "Arrays"],
-        "SQL": ["SELECT", "UPDATE", "DELETE"]
-      },
-      "AU": {
-        "PHP": ["Variables", "Strings", "Arrays"],
-        "SQL": ["SELECT", "UPDATE", "DELETE"]
-      }
-    }
-    window.onload = function() {
-      var subjectSel = document.getElementById("US");
-      var topicSel = document.getElementById("CN");
-      var chapterSel = document.getElementById("AU");
-      for (var x in subjectObject) {
-        subjectSel.options[subjectSel.options.length] = new Option(x, x);
-      }
-      subjectSel.onchange = function() {
-    //empty Chapters- and Topics- dropdowns
-    chapterSel.length = 1;
-    topicSel.length = 1;
-        //display correct values
-        for (var y in subjectObject[this.value]) {
-          topicSel.options[topicSel.options.length] = new Option(y, y);
-        }
-      }
-      topicSel.onchange = function() {
-    //empty Chapters dropdown
-    chapterSel.length = 1;
-        //display correct values
-        var z = subjectObject[subjectSel.value][this.value];
-        for (var i = 0; i < z.length; i++) {
-          chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
-        }
-      }
-    }
-    </script>
-    
-    <form name="form1" id="form1" action="/action_page.php">
-    <select name="US" id="US">
-        <option value="" selected="selected">Select country</option>
-      </select>
-      <br><br>
-   <select name="CN" id="CN">
-        <option value="" selected="selected">Please select country first</option>
-      </select>
-      <br><br>
-   <select name="AU" id="AU">
-        <option value="" selected="selected">Please select state first</option>
-      </select>
-      <br><br>
-      <input type="submit" value="Submit">  
+    <h2>Directly Search Up City Here (Case Sensitive):</h2>
+    <form action="/direct_get_info" method= "POST">
+      <input type="text" name="location" placeholder="New York" >
+       <input class="btn btn-primary" type="submit" value="Get Data">
     </form>
+  </div>
 
-
-<p> Select one from the given options:
+<p> <strong>All Countries:</strong>
   <div class = "dropdown">
     <select id="select1">
-      {% for page in air%}
+      {% for page in countries%}
       <option value={{page}}>{{page}}</option>
       {% endfor %}
      </select>
   </div>
 </p>
 
-<p> The value of the option selected is: 
-    <span class="output"></span>
+<p> <strong>All Cities:</strong>
+  <div class = "dropdown">
+    <select id="select2">
+      {% for value in locations%}
+        {% for val in value%}
+          <option value={{val}}>{{val}}</option>
+      {% endfor %}
+      {% endfor %}
+     </select>
+  </div>
 </p>
 
+<br>
 
+<h2>Select a Country to see Available Locations:</h2>
+<div class="dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Air Quality)</a>
+  <form action="/find_locations" method="POST">
+      {% for page in countries%}
+        <input name="name" value="{{page}}" type="submit" class="dropdown-item">
+      {% endfor %}
+  </form>
+</div>
+
+<div class="dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Data)</a>
+  <form action="/countries_data" method="POST">
+      {% for page in countries%}
+        <input name="country_name" value="{{page}}" type="submit" class="dropdown-item">
+      {% endfor %}
+  </form>
+</div>
+<br>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+<<<<<<< HEAD
 <button onclick="getOption()"> Check option </button>
   
 <script type="text/javascript">
@@ -189,9 +147,9 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 
 </script>
 
+=======
+>>>>>>> 7ee77b86263f79ddd6371356ca659fd5faca27e7
 </body>
-
-
 
 <div class="mt-5 p-4 bg-dark text-white text-center">
   <p>GGG Inc</p>

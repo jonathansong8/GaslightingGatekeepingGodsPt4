@@ -213,7 +213,7 @@ def get_countries():
         
         table.append((i, str("Population of " + i + ": " + str(population)), capital, flag))
     
-    new = "'<a href="">'
+    new = ""
     for i in table:
         new = new + ""
         for j in range(len(i)):
@@ -225,5 +225,17 @@ def get_countries():
     return new
 
 
+def get_country(country_name):
+    API_URL = f"https://restcountries.com/v3.1/name/{country_name}"
 
+    r = requests.get(API_URL) #creating a response object that will get us the information we needr
+    api_dict = r.json() #r.json() returns a dictonary after deconding the response object
+    population = (api_dict[0])["population"]
+    capital = (api_dict[0])["capital"]
+    for j in capital:
+        capital = j
+    flag = (api_dict[0])["flag"]
+    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag
+    return new
+    
 
