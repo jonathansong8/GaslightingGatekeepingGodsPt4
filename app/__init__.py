@@ -20,21 +20,16 @@ temp_1 = list(db.get_final().values())
 @app.route('/')
 def index():
     if 'username' in session:
-<<<<<<< HEAD
         return render_template('home_page.html',username = session['username'],countriesinfo="TBD",air="TBD", dropdown = get_countries())
         temp = db.get_table_specifics("locationInfo","name")
         test = []
         for i in temp:
             test.append(i[0])
         return render_template('home_page.html',username = session['username'],air=test)
-=======
-        return redirect("/home")
->>>>>>> 7ee77b86263f79ddd6371356ca659fd5faca27e7
     return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-<<<<<<< HEAD
     '''
     if request.method == 'POST':
         session['username'] = request.form['username']
@@ -50,20 +45,6 @@ def login():
         for i in temp:
             test.append(i[0])
         resp = render_template('home_page.html',username = session['username'],air=test)
-=======
-    #Check if it already exists in database and render home page if it does
-    #otherwise redirect to error page which will have a button linking to the login page
-    username = request.form.get('username')
-    password = request.form.get('password')
-    if db.verify_account(username,password):
-        session['username'] = username
-        session['password'] = password
-        return redirect("/home")
-    if request.form.get('submit_button') is not None:
-        return render_template("registration.html")
-    else:
-        resp = make_response(render_template('error.html',msg = "username or password is not correct"))
->>>>>>> 7ee77b86263f79ddd6371356ca659fd5faca27e7
         return resp
 
 @app.route('/register', methods = ['GET', 'POST'])
@@ -86,7 +67,6 @@ def home():
     if db.verify_account(username, password):
         return render_template('home_page.html',username = session['username'],countriesinfo="TBD",countries=temp,locations=temp_1)
 
-<<<<<<< HEAD
     # POST request: handle the form response and redirect
     username = request.form['username']
     password = request.form['password']
@@ -97,13 +77,6 @@ def home():
         return render_template('login.html')
     db.add_account(username,password)
     return redirect(url_for('login'))
-=======
-def verify_session():
-    if 'username' in session and 'password' in session:
-        if db.verify_account(session['username'], session['password']):
-            return True
-    return False
->>>>>>> 7ee77b86263f79ddd6371356ca659fd5faca27e7
 
 @app.route('/direct_get_info',methods = ['GET', 'POST'])
 def direct_get_info():
@@ -127,10 +100,15 @@ def find_locations():
         except:
             arr2 = " pls work"
         return make_response(render_template("locations.html",arr=arr, arr2=arr2))
-
-@app.route('/extract_data', methods = ['GET', 'POST'])
-def location_data():
-    if request.method == 'POST' and verify_session():
+= 'POST' and verify_session():
+        country = request.form.get("country_name")
+        print(country)
+        try:
+            country = get_country(country)
+        except:
+            country = "No data"
+        return make_response(render_template("country.html", country=country))
+ 'POST' and verify_session():
         locations = request.form.get('location_name')
         dict_aq_data = lookup_by_city_name(locations)
         try:
