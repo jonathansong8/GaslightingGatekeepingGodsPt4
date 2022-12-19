@@ -100,22 +100,7 @@ def find_locations():
         except:
             arr2 = " pls work"
         return make_response(render_template("locations.html",arr=arr, arr2=arr2))
- 'POST' and verify_session():
-        country = request.form.get("country_name")
-        print(country)
-        try:
-            country = get_country(country)
-        except:
-            country = "No data"
-        return make_response(render_template("country.html", country=country))
- 'POST' and verify_session():
-        locations = request.form.get('location_name')
-        dict_aq_data = lookup_by_city_name(locations)
-        try:
-            country = request.form.get("country_data")
-        except:
-            country = " THERE WAS NO COUNTRY??"
-        return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,country=country))
+
 
 @app.route('/countries_data', methods = ['GET', 'POST'])
 def countries_data():
