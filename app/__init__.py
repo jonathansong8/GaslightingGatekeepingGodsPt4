@@ -100,7 +100,7 @@ def find_locations():
         except:
             arr2 = " pls work"
         return make_response(render_template("locations.html",arr=arr, arr2=arr2))
-= 'POST' and verify_session():
+ 'POST' and verify_session():
         country = request.form.get("country_name")
         print(country)
         try:
