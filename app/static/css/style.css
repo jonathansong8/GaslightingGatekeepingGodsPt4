@@ -50,3 +50,26 @@
 .dropdown{ 
     max-height: 200px; overflow-y: scroll; 
 }
+
+
+.everything_except_footer{
+    margin-bottom:0px;
+}
+.footer,
+.extra_element{
+    position: fixed; 
+    bottom: 70px;
+    width:1875px;
+    height:50px;
+    text-align: center;
+}
+
+.background-image{
+    background-image: url('https://www.hdwallpaper.nu/wp-content/uploads/2015/07/869c978552ff253563b883e6f808f066.jpg');
+    background-repeat: no-repeat;
+}
+
+.background-image2{
+    background-image: url('https://th.bing.com/th/id/R.f8bf95672e01f350645a7c15e6e98fff?rik=5lOSaQbnWvRORw&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f9%2f4%2f5%2f269395.jpg&ehk=EQFRb3T%2fH%2bhkwe%2f5KnbTzizAQvVwPgZ6X57lzQ8NaG4%3d&risl=&pid=ImgRaw&r=0');
+    background-repeat: no-repeat;
+}
