@@ -238,10 +238,15 @@ def get_country(country_name):
     api_dict = r.json() #r.json() returns a dictonary after deconding the response object
     population = (api_dict[0])["population"]
     capital = (api_dict[0])["capital"]
+    continents = (api_dict[0])["continents"]
+    map = (api_dict[0])["maps"]
+    map = map.get("googleMaps")
+    for j in continents:
+        continents = j
     for j in capital:
         capital = j
     flag = (api_dict[0])["flag"]
-    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag
+
+    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map</strong>: <img src=" + map + "><br>"
     return new
-    
 
