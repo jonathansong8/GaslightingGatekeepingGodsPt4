@@ -93,3 +93,16 @@ KevinX -- 2022-12-18 17:27
 --------------------------------------------------------------
 Completed countries displaying data functionality, next step is to figure out how to render flags (not in MVP)
 ==============================================================
+
+
+KevinX -- 2022-12-19 19:00
+--------------------------------------------------------------
+Rendered flags, finished styling login and registration
+==============================================================
+
+
+KevinX -- 2022-12-20 18:00
+--------------------------------------------------------------
+Added more data to countries, embedded google maps
+==============================================================
+
