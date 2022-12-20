@@ -247,6 +247,6 @@ def get_country(country_name):
         capital = j
     flag = (api_dict[0])["flag"]
 
-    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map</strong>: <img src=" + map + "><br>"
+    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map</strong>: <br><iframe src='" + map + "'width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy'></iframe><br>"
     return new
 
