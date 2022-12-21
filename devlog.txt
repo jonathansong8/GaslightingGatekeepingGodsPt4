@@ -89,7 +89,39 @@ DanielL -- 2022-12-15 10:46
 Populated Country Info Table. Work on Locations Inside Country
 ==============================================================
 
+DanielL -- 2022-12-17 20:56
+--------------------------------------------------------------
+Rewrite app routing and templates. Finish Air Quality Data Collection Function. Made Nav bar forms for sections.
+==============================================================
+
+DanielL -- 2022-12-18 10:22
+--------------------------------------------------------------
+Custom error handling. Improve styling.
+==============================================================
+
 KevinX -- 2022-12-18 17:27
 --------------------------------------------------------------
 Completed countries displaying data functionality, next step is to figure out how to render flags (not in MVP)
 ==============================================================
+
+DanielL -- 2022-12-19 18:58
+--------------------------------------------------------------
+Split countries and air quality table (rewrote function for list of countries). Debug app.
+==============================================================
+
+KevinX -- 2022-12-19 19:00
+--------------------------------------------------------------
+Rendered flags, finished styling login and registration
+==============================================================
+
+KevinX -- 2022-12-20 18:00
+--------------------------------------------------------------
+Added more data to countries, embedded google maps
+==============================================================
+
+DanielL -- 2022-12-20 19:13
+--------------------------------------------------------------
+Debug App. Fix error with air quality displaying incorrectly/incompletely. Remove footer on specific sections. More detailed air quality data (like time updated). 
+Add Image Showing what Measurements Mean.
+==============================================================
+

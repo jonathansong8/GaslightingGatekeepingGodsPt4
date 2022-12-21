@@ -106,12 +106,11 @@ def direct_get_info():
 def find_locations():
     if request.method == 'POST' and verify_session():
         country = request.form.get('name')
-        country = db.convert(country)
-        try:
-            arr = get__all_cities(country)
-            data = get_country(country)
-        except:
-            print(f"There are no cities available for{country}")
+        country_code = db.convert(country)
+        if len(get__all_cities(country_code)) == 0:
+            return render_template("error.html", msg = f"There are no cities available for {country} in the Air Quality API")
+        else:
+            arr = get__all_cities(country_code)
         return make_response(render_template("locations.html",arr=arr,username=session["username"]))
     return make_response(render_template("error.html",msg="Error Caught"))
 
@@ -119,12 +118,9 @@ def find_locations():
 def location_data():
     if request.method == 'POST' and verify_session():
         locations = request.form.get('location_name')
+        rel_country = find_country_of(locations)
         dict_aq_data = lookup_by_city_name(locations)
-        try:
-            country = request.form.get("country_data")
-        except:
-            country = "THERE WAS NO COUNTRY??"
-        return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,country=locations))
+        return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,relevant=locations,rel_country=rel_country.capitalize()))
     return make_response(render_template("error.html",msg="Error Caught"))
 
 @app.route('/countries_data', methods = ['GET', 'POST'])
