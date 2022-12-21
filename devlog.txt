@@ -125,3 +125,8 @@ Debug App. Fix error with air quality displaying incorrectly/incompletely. Remov
 Add Image Showing what Measurements Mean.
 ==============================================================
 
+NicholasT -- 2022-12-20 19:44
+--------------------------------------------------------------
+Added custom parsing for search bar to distinguish between requests for Weather and Air
+Displayed Weather Data
+==============================================================
