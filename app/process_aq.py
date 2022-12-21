@@ -50,9 +50,7 @@ def lookup_by_city_id(id):
     return temp
 
 def lookup_by_city_name(name):
-    print(name)
     link = process( "https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=" + name + "&order_by=lastUpdated&dumpRaw=false")
-    print(link)
     name_location = link[0]["location"]
     temp = link[0]["measurements"]
     result = {}

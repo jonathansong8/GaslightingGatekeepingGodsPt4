@@ -6,6 +6,9 @@ import os
 import db
 from countries import *
 from process_aq import *
+from test_weather_calls import *
+import re
+
 
 #the conventional way:
 #from flask import Flask, render_template, request
@@ -66,17 +69,36 @@ def verify_session():
             return True
     return False
 
+def is_float(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
 @app.route('/direct_get_info',methods = ['GET', 'POST'])
 def direct_get_info():
     if request.method == 'POST' and verify_session():
         loc = request.form.get('location')
-        try:
-            var = lookup_by_city_name(loc)
-        except:
-            return render_template("error.html",msg=f"{loc} is not a valid location")
-        if find_country_of(loc) != "Not Found":
-            #return make_response(render_template("test.html",info=var,country_name=find_country_of(loc)))
-            return make_response(render_template("direct.html",info=var,country_name=find_country_of(loc),selection=loc))
+        user_in = loc.split()
+        print(user_in)
+        print(user_in[0],re.match(r'^-?\d+(?:\.\d+)$', user_in[0]))
+        if len(user_in)==2 and is_float(user_in[0]) and is_float(user_in[1]):
+            print("hi")
+            try:
+                curr = location(user_in[0],user_in[1])
+            except:
+                return render_template("error.html",msg=f"{loc} is not a valid location")
+            return make_response(render_template("direct.html",info=forecast(user_in[0],user_in[1]),country_name=curr[0],selection=curr[1]))   
+        else:
+            try:
+                var = lookup_by_city_name(loc)
+            except:
+                return render_template("error.html",msg=f"{loc} is not a valid location")
+            if find_country_of(loc) != "Not Found":
+                #return make_response(render_template("test.html",info=var,country_name=find_country_of(loc)))
+                return make_response(render_template("direct.html",info=var,country_name=find_country_of(loc),selection=loc))
     return render_template("error.html",msg="Error Caught")
     
         
@@ -109,7 +131,6 @@ def location_data():
 def countries_data():
     if request.method == 'POST' and verify_session():
         country = request.form.get("country_name")
-        print(country)
         try:
             country = get_country(country)
         except:

@@ -19,22 +19,21 @@ def forecast(latitude,longitude):
         if "forecast" in sub:
             forecast[sub]=original["properties"][sub]
     
-    info = []
+    info = {}
     general_forecast=forecast["forecast"]
     curr_json = process(general_forecast)
     for i in curr_json["properties"]["periods"]:
         time = []
-        time.append(i["name"])
-        time.append(i["isDaytime"])
-        time.append(i["temperature"])
-        time.append(i["temperatureUnit"])
-        time.append(i["windSpeed"])
-        time.append(i["windDirection"])
-        time.append(i["shortForecast"])
-        time.append(i["detailedForecast"])
-        info.append(time)
+        time.append("Date: "+i["name"])
+        time.append("isDaytime: "+str(i["isDaytime"]))
+        time.append("Temperature: "+str(i["temperature"]))
+        time.append("Temperature Unit: "+i["temperatureUnit"])
+        time.append("Wind Speed: "+i["windSpeed"])
+        time.append("Wind Direction: "+i["windDirection"])
+        time.append("Short Forecast: "+i["shortForecast"])
+        time.append("Detailed Forecast: "+i["detailedForecast"])
+        info[i["number"]]="\n".join(time)
     return info
-print(location(35,-78),forecast(35,-78))
 """
 def process(url):
     response = requests.get(url)
