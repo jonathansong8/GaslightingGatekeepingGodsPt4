@@ -234,12 +234,27 @@ def get_countries():
 def get_country(country_name):
     API_URL = f"https://restcountries.com/v3.1/name/{country_name}"
 
-    r = requests.get(API_URL) #creating a response object that will get us the information we needr
-    api_dict = r.json() #r.json() returns a dictonary after deconding the response object
-    #print(api_dict)
+    r = requests.get(API_URL) #creating a response object that will get us the information we need
+    api_dict = r.json() #r.json() returns a dictionary after decoding the response object
     population = (api_dict[0])["population"]
     capital = (api_dict[0])["capital"]
     continents = (api_dict[0])["continents"]
+    timeZone = api_dict[0]["timezones"][0]
+    latlng = api_dict[0]["latlng"]
+    latlng = str(tuple(latlng))
+    flag_url = api_dict[0]["flags"]['png']
+    
+    curren = []
+    temp = api_dict[0]["currencies"]
+    for x in temp.keys():
+        for a in temp[x].values():
+            curren.append(a)
+    curren_string = ""
+    curren_string += curren[0]
+    lang = ""
+    temp1 = list(api_dict[0]["languages"].values())
+    for en in temp1:
+        lang += en + ", "
     map = (api_dict[0])["maps"]
     map = map.get("googleMaps")
     for j in continents:
@@ -247,9 +262,10 @@ def get_country(country_name):
     for j in capital:
         capital = j
     flag = (api_dict[0])["flag"]
-    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map Link</strong>: " + f"<a href={map}>Google Maps of {country_name}</a>"
+    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital +  "<br> \n <strong>Currency</strong>: " + curren_string + "<br> \n <strong>Time Zone</strong>: " + timeZone +  "<br> \n <strong>Latitude/Longitude</strong>: " + latlng + "<br> \n <strong>Languages</strong>: " + lang + "<br> \n <strong>Flag</strong>: " + flag + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map Link</strong>: " + f"<a href={map}>Google Maps of {country_name}</a>" + f"<br> \n <img src= {flag_url} alt=Flag of {country_name} width=400 height=400>"
     return new
 
+'''
 def get_country_map(country_name):
     API_URL = f"https://restcountries.com/v3.1/name/{country_name}"
     r = requests.get(API_URL) #creating a response object that will get us the information we needr
@@ -257,3 +273,4 @@ def get_country_map(country_name):
     map = (api_dict[0])["maps"]
     map = map.get("googleMaps")
     return map
+'''
