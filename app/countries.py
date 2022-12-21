@@ -236,6 +236,7 @@ def get_country(country_name):
 
     r = requests.get(API_URL) #creating a response object that will get us the information we needr
     api_dict = r.json() #r.json() returns a dictonary after deconding the response object
+    #print(api_dict)
     population = (api_dict[0])["population"]
     capital = (api_dict[0])["capital"]
     continents = (api_dict[0])["continents"]
@@ -246,7 +247,13 @@ def get_country(country_name):
     for j in capital:
         capital = j
     flag = (api_dict[0])["flag"]
-
-    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map</strong>: <br><iframe src='" + map + "'width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy'></iframe><br>"
+    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital + "<br> \n <strong>Flag</strong>: " + flag + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map Link</strong>: " + f"<a href={map}>Google Maps of {country_name}</a>"
     return new
 
+def get_country_map(country_name):
+    API_URL = f"https://restcountries.com/v3.1/name/{country_name}"
+    r = requests.get(API_URL) #creating a response object that will get us the information we needr
+    api_dict = r.json() #r.json() returns a dictonary after deconding the response object
+    map = (api_dict[0])["maps"]
+    map = map.get("googleMaps")
+    return map

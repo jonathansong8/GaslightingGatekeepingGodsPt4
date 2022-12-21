@@ -4,8 +4,11 @@
 
 The API’s we will use are the Google Maps API, Air Quality API, Water Quality API, and to some extent, the Country API. We will use the Google Maps API to create tables of relevant data. Once the user clicks on a country, a window will pop up in the corner of their screen for that country that displays relevant information specific to that country, like Air Quality and Water Quality. In order to fully customize the window, we will use the Country API to show data like flags and population. As a stretch goal, we may also incorporate Chat GPT in some manner.
 
-# Note
-This App Does Not Require API Keys.
+# Relevant API Cards
+
+Air Quality API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_air_quality.md
+Country API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_countries.md
+Weather API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_weatherAPI.md
 
 # Launch Codes
 
@@ -29,12 +32,12 @@ This App Does Not Require API Keys.
 3. `cd` into the app directory
 
  ```bash
- cd app
+ cd app/
  ```
 4. Start Flask server
 
  ```bash
- python app/__init__.py
+ python __init__.py
  ```
 
 5. Visit `http://127.0.0.1:5000/` in browser

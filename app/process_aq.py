@@ -50,15 +50,16 @@ def lookup_by_city_id(id):
     return temp
 
 def lookup_by_city_name(name):
-    print(name)
     link = process( "https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=" + name + "&order_by=lastUpdated&dumpRaw=false")
-    print(link)
     name_location = link[0]["location"]
-    temp = link[0]["measurements"]
+    try:
+        temp = link[1]["measurements"]
+    except:
+        temp = link[0]["measurements"]
     result = {}
     for entry in temp:
-        key = entry["parameter"] + " (" + entry["unit"] + ")"
-        value = entry["value"] 
+        key = entry["parameter"] + " (Last Updated On: " + entry["lastUpdated"][:9] + ")"
+        value = str(entry["value"]) + " " + entry["unit"] 
         result[key] = value
     #print(code + ", " + link[0]["country"])
     return result
@@ -66,7 +67,7 @@ def lookup_by_city_name(name):
 def parse_measurements(city_id):
     result = {}
     for entry in city_id:
-        key = entry["parameter"] + " (" + entry["unit"] + ")"
+        key = entry["parameter"] + " " + entry["unit"] 
         value = entry["value"]
         result[key] = value
     return result
