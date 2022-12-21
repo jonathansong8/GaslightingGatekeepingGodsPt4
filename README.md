@@ -6,8 +6,8 @@ The API’s we will use are the Google Maps API, Air Quality API, Water Quality 
 
 # Relevant API Cards
 
-Air Quality API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_air_quality.md
-Country API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_countries.md
+Air Quality API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_air_quality.md \
+Country API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_countries.md \
 Weather API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_weatherAPI.md
 
 # Launch Codes

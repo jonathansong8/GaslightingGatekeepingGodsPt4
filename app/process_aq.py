@@ -27,7 +27,6 @@ def get__all_cities(country_name):
             a.append(city["city"])
     return a
 
-
 def find_country_of(city_name):
     x = process("https://api.openaq.org/v2/locations?limit=1000&page=1&offset=0&sort=desc&city=" + city_name + "&order_by=lastUpdated&dumpRaw=false")
     for loc in x:
