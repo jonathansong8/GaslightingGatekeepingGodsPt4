@@ -20,8 +20,9 @@ def forecast(latitude,longitude):
             forecast[sub]=original["properties"][sub]
     
     info = {}
-    general_forecast=forecast["forecast"]
+    general_forecast=forecast["forecast"] #this is a link
     curr_json = process(general_forecast)
+    print(curr_json)
     for i in curr_json["properties"]["periods"]:
         time = []
         time.append("Date: "+i["name"])
@@ -34,6 +35,8 @@ def forecast(latitude,longitude):
         time.append("Detailed Forecast: "+i["detailedForecast"])
         info[i["number"]]="\n".join(time)
     return info
+
+#print(forecast(35,-78))
 """
 def process(url):
     response = requests.get(url)

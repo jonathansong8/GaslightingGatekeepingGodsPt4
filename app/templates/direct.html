@@ -26,11 +26,6 @@
           <h1>{{selection}}, {{country_name}}</h1>
         </div>
 
-        <div class = "text-center">
-          <img src="https://www.epa.gov.tw/File/C8314F72F3092ECE?s=l" alt="Air Quality Ranges" style="width:700px;"> 
-          </div>
-
-      <div class="container mt-3">
         <table class="table table-hover">
           <tr>
               {% for key in info.keys() %}
@@ -43,15 +38,11 @@
           {% endfor %}
         
         </table>
-        </div>
 
-        <p>
-        {% for key,value in info.items() %}
-              <dt>{{ key }}</dt>
-              <dd>{{ value}}</dd>
-            {% endfor %}
-        </p>
-
+        <div class = "text-center">
+          <img src="https://www.epa.gov.tw/File/C8314F72F3092ECE?s=l" alt="Air Quality Ranges" style="width:700px;"> 
+          </div>
+          
         <form action="/">
           <input class="btn btn-outline-success" type=submit value="Back to home">
         </form>

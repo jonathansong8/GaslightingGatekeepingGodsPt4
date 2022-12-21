@@ -89,7 +89,7 @@ def direct_get_info():
                 curr = location(user_in[0],user_in[1])
             except:
                 return render_template("error.html",msg=f"{loc} is not a valid location in the United States")
-            return make_response(render_template("direct.html",info=forecast(user_in[0],user_in[1]),country_name=curr[0],selection=curr[1]))   
+            return make_response(render_template("weather.html",info=forecast(user_in[0],user_in[1]),country_name=curr[0],selection=curr[1]))   
         else:
             try:
                 var = lookup_by_city_name(loc)

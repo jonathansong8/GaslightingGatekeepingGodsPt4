@@ -58,7 +58,7 @@ def lookup_by_city_name(name):
         temp = link[0]["measurements"]
     result = {}
     for entry in temp:
-        key = entry["parameter"] + " (Last Updated On: " + entry["lastUpdated"][:9] + ")"
+        key = entry["parameter"] + " (Last Updated On: " + entry["lastUpdated"][:10] + ")"
         value = str(entry["value"]) + " " + entry["unit"] 
         result[key] = value
     #print(code + ", " + link[0]["country"])
