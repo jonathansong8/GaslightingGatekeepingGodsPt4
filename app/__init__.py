@@ -82,14 +82,13 @@ def direct_get_info():
     if request.method == 'POST' and verify_session():
         loc = request.form.get('location')
         user_in = loc.split()
-        print(user_in)
-        print(user_in[0],re.match(r'^-?\d+(?:\.\d+)$', user_in[0]))
+        #print(user_in)
+        #print(user_in[0],re.match(r'^-?\d+(?:\.\d+)$', user_in[0]))
         if len(user_in)==2 and is_float(user_in[0]) and is_float(user_in[1]):
-            print("hi")
             try:
                 curr = location(user_in[0],user_in[1])
             except:
-                return render_template("error.html",msg=f"{loc} is not a valid location")
+                return render_template("error.html",msg=f"{loc} is not a valid location in the United States")
             return make_response(render_template("direct.html",info=forecast(user_in[0],user_in[1]),country_name=curr[0],selection=curr[1]))   
         else:
             try:
