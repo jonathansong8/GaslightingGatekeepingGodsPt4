@@ -130,3 +130,8 @@ NicholasT -- 2022-12-20 19:44
 Added custom parsing for search bar to distinguish between requests for Weather and Air
 Displayed Weather Data
 ==============================================================
+
+NicholasT -- 2022-12-20 22:14
+--------------------------------------------------------------
+Edited error handling with the search bar
+==============================================================
