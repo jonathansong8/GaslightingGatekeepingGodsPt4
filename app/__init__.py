@@ -82,10 +82,10 @@ def direct_get_info():
     if request.method == 'POST' and verify_session():
         loc = request.form.get('location')
         user_in = loc.split()
-        print(user_in)
-        print(user_in[0],re.match(r'^-?\d+(?:\.\d+)$', user_in[0]))
+        #print(user_in)
+        #print(user_in[0],re.match(r'^-?\d+(?:\.\d+)$', user_in[0]))
         if len(user_in)==2 and is_float(user_in[0]) and is_float(user_in[1]):
-            print("hi")
+            #print("hi")
             try:
                 curr = location(user_in[0],user_in[1])
             except:
