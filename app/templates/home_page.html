@@ -26,61 +26,82 @@
  <input type="submit" value="logout" class="btn btn-outline-danger">
    </form>
 
-   <div class="text-center">
-    <h2>Directly Search Up City Here By Name (Case Sensitive) Or Coordinates (Latitude and Longitude):</h2>
+   <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">It's A Small World</h1>
+      <p>Use the sections below to search through the dropdowns and see if your desired location is supported. Then, either type the name or latitude/longitude straight into the search bar to get air quality data (global) or weather forecasts for two weeks (weather is limited only to the US). If you are feeling curious, select a country name to get country information (like population, currency, language) or be redirected to a new page with all locations within that country.</p>
+      <p><a class="btn btn-primary btn-lg" href="https://www.airnow.gov/aqi/aqi-basics/" role="button">Learn about AQI (Air Quality Index)&raquo;</a></p>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="container">
+    <h2>Search By City Name Or Coordinates:</h2>
     <form action="/direct_get_info" method= "POST">
       <input type="text" name="location" placeholder="New York" >
-       <input class="btn btn-primary" type="submit" value="Get Data">
+       <input class="btn btn-outline-success" type="submit" value="Get Data">
     </form>
   </div>
-
-  <h2>Select a Country to see Relevant Info From Countries API:</h2>
-<div class="dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Data)</a>
-  <form action="/countries_data" method="POST">
-      {% for result in world %}
-        <input name="country_name" value="{{result}}" type="submit" class="dropdown-item">
-      {% endfor %}
-  </form>
-</div>
-
 <br>
 <br>
 
-<p> <strong>Search Through All Countries For Air Quality:</strong>
-  <div class = "dropdown">
-    <select id="select1">
-      {% for page in countries%}
-      <option value={{page}}>{{page}}</option>
-      {% endfor %}
-     </select>
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-4">
+      <p> <strong>Search Through All Countries For Air Quality:</strong>
+        <div class = "dropdown">
+          <select id="select1">
+            {% for page in countries%}
+            <option value={{page}}>{{page}}</option>
+            {% endfor %}
+           </select>
+        </div>
+      </p>
+      
+      <p> <strong>Search Through All Locations For Air Quality:</strong>
+        <div class = "dropdown">
+          <select id="select2">
+            {% for value in locations%}
+              {% for val in value%}
+                <option value={{val}}>{{val}}</option>
+            {% endfor %}
+            {% endfor %}
+           </select>
+        </div>
+      </p>
+      
+    </div>
+    <div class="col-md-4">
+      <h2>Country Info</h2>
+      <div class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Data)</a>
+        <form action="/countries_data" method="POST">
+            {% for result in world %}
+              <input name="country_name" value="{{result}}" type="submit" class="dropdown-item">
+            {% endfor %}
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h2>AQ Info</h2>
+      <div class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Air Quality)</a>
+        <form action="/find_locations" method="POST">
+            {% for result in countries%}
+              <input name="name" value="{{result}}" type="submit" class="dropdown-item">
+            {% endfor %}
+        </form>
+      </div>
+    </div>
   </div>
-</p>
-
-<p> <strong>Search Through All Locations For Air Quality:</strong>
-  <div class = "dropdown">
-    <select id="select2">
-      {% for value in locations%}
-        {% for val in value%}
-          <option value={{val}}>{{val}}</option>
-      {% endfor %}
-      {% endfor %}
-     </select>
   </div>
-</p>
+
+
 
 <br>
-
-<h2>Select a Country to see Available Locations For Air Quality:</h2>
-<div class="dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Air Quality)</a>
-  <form action="/find_locations" method="POST">
-      {% for result in countries%}
-        <input name="name" value="{{result}}" type="submit" class="dropdown-item">
-      {% endfor %}
-  </form>
-</div>
-
 <br>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -88,9 +109,11 @@
 
 </body>
 
-<div class="mt-5 p-4 bg-dark text-white text-center">
-  <h1>GGG Inc</h1>
-</div>
+<footer>
+  <div class="mt-5 p-4 bg-dark text-white text-center">
+    <h1>GGG Inc.</h1>
+  </div>
+</footer>
 
 </html>
 
