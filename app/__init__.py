@@ -51,7 +51,7 @@ def register():
         if db.add_account(userIn, passIn) == -1:
             return render_template("error.html", msg = f"account with username {userIn} already exists")
         else:
-            return render_template("register_success.html")
+            return redirect("/")
     return render_template("registration.html")
 
 @app.route('/home')
@@ -98,7 +98,7 @@ def direct_get_info():
             if find_country_of(loc) != "Not Found":
                 #return make_response(render_template("test.html",info=var,country_name=find_country_of(loc)))
                 return make_response(render_template("direct.html",info=var,country_name=find_country_of(loc),selection=loc))
-    return render_template("error.html",msg="Error Caught")
+    return redirect("/")
     
         
 @app.route('/find_locations', methods = ['GET', 'POST'])
@@ -111,7 +111,7 @@ def find_locations():
         else:
             arr = get__all_cities(country_code)
         return make_response(render_template("locations.html",arr=arr,username=session["username"]))
-    return make_response(render_template("error.html",msg="Error Caught"))
+    return redirect("/")
 
 @app.route('/extract_data', methods = ['GET', 'POST'])
 def location_data():
@@ -120,7 +120,7 @@ def location_data():
         rel_country = find_country_of(locations)
         dict_aq_data = lookup_by_city_name(locations)
         return make_response(render_template("measure.html",dict_aq_data=dict_aq_data,relevant=locations,rel_country=rel_country.capitalize()))
-    return make_response(render_template("error.html",msg="Error Caught"))
+    return redirect("/")
 
 @app.route('/countries_data', methods = ['GET', 'POST'])
 def countries_data():
@@ -131,7 +131,7 @@ def countries_data():
         except:
             country = "No data"
         return make_response(render_template("country.html", country=country))
-    return make_response(render_template("error.html",msg="Error Caught"))
+    return redirect("/")
 
 @app.route("/logout")
 def logout():

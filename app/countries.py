@@ -262,7 +262,9 @@ def get_country(country_name):
     for j in capital:
         capital = j
     flag = (api_dict[0])["flag"]
-    new = "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital +  "<br> \n <strong>Currency</strong>: " + curren_string + "<br> \n <strong>Time Zone</strong>: " + timeZone +  "<br> \n <strong>Latitude/Longitude</strong>: " + latlng + "<br> \n <strong>Languages</strong>: " + lang + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map Link</strong>: " + f"<a href={map}>Google Maps of {country_name}</a>" + f"<br> \n <img src= {flag_url} alt=Flag of {country_name} width=400 height=400>"
+    new = ""
+    new +=  f"<br> \n <img src= {flag_url} alt=Flag of {country_name} width=400 height=400> <br>"
+    new += "<strong>Country</strong>: " + country_name + "<br> \n <strong>Population</strong>: " + str(population) + "<br> \n <strong>Capital</strong>: " + capital +  "<br> \n <strong>Currency</strong>: " + curren_string + "<br> \n <strong>Time Zone</strong>: " + timeZone +  "<br> \n <strong>Latitude/Longitude</strong>: " + latlng + "<br> \n <strong>Languages</strong>: " + lang + "<br> \n <strong>Continent:</strong>: " + continents + "<br> \n <strong>Map Link</strong>: " + f"<a href={map}>Google Maps of {country_name}</a>" 
     return new
 
 '''
