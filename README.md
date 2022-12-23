@@ -2,7 +2,9 @@
 # Jonathan Song, Daniel Liu, Nicholas Tarsis, Kevin Xiao
 # Description
 
-The API’s we will use are the Google Maps API, Air Quality API, Water Quality API, and to some extent, the Country API. We will use the Google Maps API to create tables of relevant data. Once the user clicks on a country, a window will pop up in the corner of their screen for that country that displays relevant information specific to that country, like Air Quality and Water Quality. In order to fully customize the window, we will use the Country API to show data like flags and population. As a stretch goal, we may also incorporate Chat GPT in some manner.
+The APIs we used are: Air Quality API, Country API, and the Weather API. Once the user clicks on a country from a dropdown, they will be redirected to different pages, depending on whether they are looking for country or air quality data (which are different dropdowns in different sections). On the countries page, data will be displayed like population, capital, currency, time zone, latitude/longitude, language, map link, and flag image. On the home page, there is a search bar where one can enter the city name to directly search up air quality values. On the air quality page, air quality values will be organized in a tabular format. Furthermore, one can enter latitude and longitude values within the search bar, seperated by only a space, which will be parsed and matched to that location (currently only in the US) to display the forecast for the day. 
+Some Sample Values are: (35,-78) (45 -90) (42 -71)
+Site of US States Laitiude/Longitude Values: https://www.latlong.net/category/states-236-14.html
 
 # Relevant API Cards
 
