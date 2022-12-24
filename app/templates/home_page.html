@@ -12,7 +12,6 @@
   </head>
  
   <body>
-    <body style="background-color: wheat;">
 
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -45,6 +44,8 @@
       <input type="text" name="location" placeholder="New York" >
        <input class="btn btn-outline-success" type="submit" value="Get Data">
     </form>
+    <br>
+    <p><a class="btn btn-primary btn-lg" href="https://www.latlong.net/category/states-236-14.html" role="button">Latitude and Longitudes of States in the US&raquo;</a></p>
   </div>
 <br>
 <br>
@@ -52,7 +53,6 @@
 <div class="container">
   <!-- Example row of columns -->
   <div class="row">
-    <div class="col-md-4">
       <p> <strong>Search Through All Countries For Air Quality:</strong>
         <div class = "dropdown">
           <select id="select1">
@@ -74,9 +74,10 @@
            </select>
         </div>
       </p>
-      
-    </div>
-    <div class="col-md-4">
+    
+      <br>
+      <br>
+
       <h2>Country Info</h2>
       <div class="dropdown">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Data)</a>
@@ -86,9 +87,8 @@
             {% endfor %}
         </form>
       </div>
-    </div>
-    <div class="col-md-4">
-      <h2>AQ Info</h2>
+
+      <h2>Air Quality Info</h2>
       <div class="dropdown">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Countries (Air Quality)</a>
         <form action="/find_locations" method="POST">
@@ -97,11 +97,19 @@
             {% endfor %}
         </form>
       </div>
+
+      <h2>Weather Info For the United States Of America</h2>
+      <div class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">US Locations</a>
+        <form action="/find_weather" method="POST">
+            {% for result in us_cities%}
+              <input name="location_name" value="{{result}}" type="submit" class="dropdown-item">
+            {% endfor %}
+        </form>
+      </div>
+
     </div>
   </div>
-  </div>
-
-
 
 <br>
 <br>

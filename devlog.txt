@@ -151,8 +151,13 @@ NicholasT -- 2022-12-23 00:15
 Added additional css to the html files showcasing API call results
 ==============================================================
 
-
 DanielL -- 2022-12-23 00:18
 --------------------------------------------------------------
 Error handling for weather. Update README
+==============================================================
+
+DanielL -- 2022-12-23 20:50
+--------------------------------------------------------------
+Add Geo-Locating of Location for Weather. Given a city name parameter, will 
+get the lat/long and display correctly. Final Changes.
 ==============================================================

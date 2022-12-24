@@ -19,6 +19,7 @@ temp = list(db.populate_countries().values())
 #temp_1 = list(db.get_final().values())
 temp_1 = list(db.get_final().values())
 entry_countries = get_world_countries()
+us_cities = get__all_cities("US")
 
 @app.route('/')
 def index():
@@ -60,7 +61,7 @@ def home():
     username = session['username']
     password = session['password']
     if db.verify_account(username, password):
-        return render_template('home_page.html',username = session['username'],countries=temp,locations=temp_1,world=entry_countries)
+        return render_template('home_page.html',username = session['username'],countries=temp,locations=temp_1,world=entry_countries,us_cities=us_cities)
 
 def verify_session():
     if 'username' in session and 'password' in session:
@@ -131,6 +132,21 @@ def countries_data():
         except:
             country = "No data"
         return make_response(render_template("country.html", country=country))
+    return redirect("/")
+
+@app.route('/find_weather', methods = ['GET', 'POST'])
+def find_weather():
+    if request.method == 'POST' and verify_session():
+        loc = request.form.get("location_name")
+        try:
+            loc_coords = lookup_city_coords(loc)
+        except:
+             return render_template("error.html",msg=f"No coordinates available for {loc}. Please Select An Alternate City")
+        try:
+            info = forecast(loc_coords[0],loc_coords[1])
+        except:
+            return render_template("error.html",msg=f"Rate Limit Issue with Weather API. Please Try Again")
+        return make_response(render_template("weather_us.html", location=loc, country = "United States of America", info=info))
     return redirect("/")
 
 @app.route("/logout")

@@ -63,6 +63,17 @@ def lookup_by_city_name(name):
     #print(code + ", " + link[0]["country"])
     return result
 
+def lookup_city_coords(name):
+    link = process("https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&country=US&city=" + name + "&order_by=lastUpdated&dumpRaw=false")
+    try:
+        temp = link[0]["coordinates"]
+    except:
+        temp = "Manual Intervention Required"
+    arr = []
+    for i in temp.values():
+        arr.append(round(i,2))
+    return arr
+
 def parse_measurements(city_id):
     result = {}
     for entry in city_id:
